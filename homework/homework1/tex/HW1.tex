@@ -99,7 +99,7 @@
 
 \begin{document}
 
-\title{	Convex Optimization, 2024 Spring\\Homework 1}
+\title{	SI251 - Convex Optimization, 2024 Spring\\Homework 1}
 \date{Due 23:59 (CST), Mar. 27, 2024 }
 
 \author{
@@ -112,13 +112,165 @@
 \newpage
 %===============================
 
-\section{Problem 1}
+
+\begin{enumerate}
+
+\section{Convex sets}
+\item  Please prove that the following sets are convex: 
+\begin{itemize}
+    \item[1)] $S=\left\{x \in \mathbf{R}^m \;|\;\mid p(t) \mid \leq 1 \text { for }|t| \leq \pi / 3\right\}$, where $p(t)=x_1 \cos t+x_2 \cos 2 t+\cdots+x_m \cos m t$. {\color{red} (5 pts)}
+    \item[2)] (\textbf{Ellipsoids}) $\Big\{x|\sqrt{(x-x_c)^TP(x-x_c)}\leq r\Big\}~~~(x_c\in \mathbb{R}^n, r\in \mathbb{R}, P\succeq 0)$. {\color{red} (5 pts)}
+    \item[3)] (\textbf{Symmetric positive semidefinite matrices}) $S_{+}^{n\times n}=\Big\{ P\in S^{n\times n}|P\succeq 0\Big\}$. {\color{red} (5 pts)}
+    \item[4)] The set of points closer to a given point than a given set, i.e.,
+    \begin{equation*}
+        \Big\{x~\vert~\|x-x_0\|_2\leq\|x-y\|_2~\text{for all}~y\in S\Big\},
+    \end{equation*}
+    where $S\in R^n$. {\color{red} (5 pts)}
+\end{itemize}
+
+(1)
+
+
+
+
+(2)
+
+
+
+(3)
+
+
+
+(4)
+
+
 
 
 
 \newpage
 
-\section{Problem 2}
+\item {\color{red} (15 pts)} For a given norm $\|\cdot\|$ on $\mathbf{R}^n$, the dual norm, denoted $\|\cdot\|_*$, is defined as
+$$
+\|y\|_*=\sup_{x\in\mathbf{R}^n} \{y^T x\mid\|x\|\leq1\}.
+$$ 
+Show that the dual of Euclidean norm is the Euclidean mom, i.e., $\sup_{x \in \mathbf{R}^n}\{z^{T}x \;| \;\|x\|_2\leq1\}=||z||_{2}.$\\
+
+
+
+
+
+
+
+\newpage
+
+\item {\color{red} (15 pts)} Define a norm cone as
+$$
+\mathcal{C} \equiv \left\{(x, t): x \in \mathbb{R}^d, t \geq 0,\|x\| \leq t\right\} \subseteq \mathbb{R}^{d+1}
+$$
+
+Show that the norm cone is convex by using the definition of convex sets.\\
+
+
+
+
+
+
+
+
+\newpage
+
+\section{Convex functions}
+\item {\color{red} (18 pts)} Let $C\subset \mathbb{R}^n$ be convex and $f:C\rightarrow R^\star$. Show that the following statements are equivalent:
+\begin{itemize}
+    \item[(a)] epi($f$) is convex.
+    \item[(b)] For all points $x_i\in C$ and $\{\lambda_i|\lambda_i\geq0, \sum_{i=1}^n \lambda_i=1, i=1,2,\cdots,n\}$, we have
+    \begin{equation*}
+        f\Big(\sum\limits_{i=1}^n \lambda_ix_i\Big)\leq \sum\limits_{i=1}^n \lambda_if(x_i).
+    \end{equation*}
+    \item[(c)] For $\forall x,y\in C$ and $\lambda\in[0,1]$,
+    \begin{equation*}
+        f\Big((1-\lambda)x+\lambda y\Big)\leq(1-\lambda)f(x)+\lambda f(y).
+    \end{equation*}
+\end{itemize}
+
+(a)
+
+
+
+
+
+(b)
+
+
+
+
+
+(c)
+
+
+
+
+
+
+
+\newpage
+
+\item {\color{red} (14 pts)} {Monotone Mappings. A function $\psi:\mathbf{R}^n \to \mathbf{R}^n$ is called monotone if for all $x,y \in \mathbf{dom} \psi$,
+    $$(\psi(x) - \psi (y))^T (x-y) >= 0$$
+Suppose $f : \mathbf{R}^n \to \mathbf{R}^n$ is a differentiable convex function. Show that its gradient $\nabla f$ is monotone. Is the convex true, i.e., is every monotone mapping the gradient of a convex function?}\\
+
+
+
+
+
+
+
+\newpage
+
+\item {\color{red} (18 pts)} Please determine whether the following functions are convex, concave or none of those, and give a detailed explanation for your choice.
+\begin{itemize}
+    \item[1)] 
+     \begin{equation*}
+     f_1(x_1,x_2,\cdots,x_n)=
+      \begin{cases}
+         &-(x_1x_2\cdots x_n)^{\frac{1}n},~~ \text{if}~~x_1,\cdots,x_n>0\\
+         &~~\infty ~~~~~~~~~~~~~~~~\text{otherwise};\
+       \end{cases}
+     \end{equation*}
+    \item[2)] $f_2(x_1,x_2)= x_1^\alpha x_2^{1-\alpha}$, where $0\leq\alpha\leq1$, on $\mathbb{R}_{++}^2$;
+    \item[3)] $f_3(x,u,v)=-\log(uv-x^Tx)$ on ${\bf dom} f =\{(x,u,v)|uv>x^Tx,~~u,v>0\}$.
+\end{itemize}
+
+(1)
+
+
+
+
+(2)
+
+
+
+
+(3)
+
+
+
+
+
+
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
 
 
 \end{document}
