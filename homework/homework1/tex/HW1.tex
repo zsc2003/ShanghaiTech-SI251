@@ -25,6 +25,9 @@
 % support llbracket and rrbracket  []
 \usepackage{stmaryrd}
 
+% \dom
+\usepackage{amssymb}
+
 
 \newtheorem{thm}{Theorem}
 \newtheorem{mydef}{Definition}
@@ -128,23 +131,80 @@
     where $S\in R^n$. {\color{red} (5 pts)}
 \end{itemize}
 
-(1)
+(1) For a fixed $t\in [-\dfrac{\pi}{3},\dfrac{\pi}{3}]$, we could know that $\cos t, \cos 2t,\cdots,\cos mt$ are certein constants, so $p(t)$ is a linear function of $\mathbf{x}$.\\
+Since $|p(t)|\leq 1 \Leftrightarrow -1\leq p(t)\leq 1$.\\
+So let $S_t=\{\mathbf{x}|-1\leq x_1\cos t+\cdots+x_n\cos nt \leq 1\}$.\\
+Since $p(t)$ is linear function of $\mathbf{x}$, so $S_t$ is a convex set.\\
+And we could know that 
+$$S=\bigcap_{-\frac{\pi}{3}\leq t\leq\frac{\pi}{3}}S_t$$
+
+From the theorem, we could know that the intersection of convex sets is also a convex set, so $S$ is a convex set.
+
+So above all, we have proved that $S$ is a convex set.\\
+
+(2) Let $S$ be the Ellipsoids set, and we could know that $\forall\mathbf{x}_1,\mathbf{x}_2\in S$, we have $(\mathbf{x}_1-\mathbf{x}_c)^TP(\mathbf{x}_1-\mathbf{x}_c)\leq r^2$ and $(\mathbf{x}_2-\mathbf{x}_c)^TP(\mathbf{x}_2-\mathbf{x}_c)\leq r^2$.\\
+And $\forall\theta\in[0,1]$, since $P\succeq 0$, so $P$ is symmetric, so we have
+\begin{align*}
+    &\ \ \  [(\theta\mathbf{x}_1+(1-\theta)\mathbf{x}_2)-\mathbf{x}_c]^TP[(\theta\mathbf{x}_1+(1-\theta)\mathbf{x}_2)-\mathbf{x}_c] \\
+    &= \theta^2(\mathbf{x}_1-\mathbf{x}_c)^TP(\mathbf{x}_1-\mathbf{x}_c)+2\theta(1-\theta)(\mathbf{x}_1-\mathbf{x}_c)^TP(\mathbf{x}_2-\mathbf{x}_c)+(1-\theta)^2(\mathbf{x}_2-\mathbf{x}_c)^TP(\mathbf{x}_2-\mathbf{x}_c)\\
+    &\leq \theta^2r^2+(1-\theta)^2r^2+2\theta(1-\theta)(\mathbf{x}_1-\mathbf{x}_c)^TP(\mathbf{x}_2-\mathbf{x}_c)
+\end{align*}
+
+And since $P\succeq 0$, so $P$ could be decomposition as $P=Q^T\Lambda Q$, so $P^{\frac{1}{2}}=Q^T\Lambda^{\frac{1}{2}}Q$, i.e. $P^{\frac{1}{2}}\succeq 0$.、、
+so
+\begin{align*}
+    (\mathbf{x}_1-\mathbf{x}_c)^TP(\mathbf{x}_2-\mathbf{x}_c) &= (\mathbf{x}_1-\mathbf{x}_c)^T(P^{\frac{1}{2}})^T(P^{\frac{1}{2}})(\mathbf{x}_2-\mathbf{x}_c)\\
+    &= [P^{\frac{1}{2}}(\mathbf{x}_1-\mathbf{x}_c)]^T[P^{\frac{1}{2}}(\mathbf{x}_2-\mathbf{x}_c)]\\
+    &\leq \|[P^{\frac{1}{2}}(\mathbf{x}_1-\mathbf{x}_c)]\|_2\cdot\|P^{\frac{1}{2}}(\mathbf{x}_2-\mathbf{x}_c)\|_2
+\end{align*}
+
+Since $x_1\in S$, so 
+$$(\mathbf{x}_1-\mathbf{x}_c)^TP(\mathbf{x}_1-\mathbf{x}_c)=(\mathbf{x}_1-\mathbf{x}_c)^T(P^{\frac{1}{2}})^T[P^{\frac{1}{2}}(\mathbf{x}_1-\mathbf{x}_c)]=\|P^{\frac{1}{2}}(\mathbf{x}_1-\mathbf{x}_c)\|_2^2\leq r^2$$
+i.e. $$\|P^{\frac{1}{2}}(\mathbf{x}_1-\mathbf{x}_c)\|\leq r$$
+Similarly, we have  $$\|P^{\frac{1}{2}}(\mathbf{x}_2-\mathbf{x}_c)\|\leq r$$
+
+So
+\begin{align*}
+    (\mathbf{x}_1-\mathbf{x}_c)^TP(\mathbf{x}_2-\mathbf{x}_c) &\leq \|[P^{\frac{1}{2}}(\mathbf{x}_1-\mathbf{x}_c)]\|_2\cdot\|P^{\frac{1}{2}}(\mathbf{x}_2-\mathbf{x}_c)\|_2\\
+    &\leq r\cdot r\\
+    &= r^2
+\end{align*}
+
+So 
+\begin{align*}
+    &\ \ \  [(\theta\mathbf{x}_1+(1-\theta)\mathbf{x}_2)-\mathbf{x}_c]^TP[(\theta\mathbf{x}_1+(1-\theta)\mathbf{x}_2)-\mathbf{x}_c] \\
+    &\leq \theta^2r^2+(1-\theta)^2r^2+2\theta(1-\theta)(\mathbf{x}_1-\mathbf{x}_c)^TP(\mathbf{x}_2-\mathbf{x}_c)\\
+    &\leq \theta^2r^2+(1-\theta)^2r^2+2\theta(1-\theta)r^2\\
+    &= r^2
+\end{align*}
+So $\theta\mathbf{x}_1+(1-\theta)\mathbf{x}_2\in S$.\\
+
+So above all, we have proved that $\forall\mathbf{x}_1,\mathbf{x}_2\in S, \forall\theta\in [0,1]$, we have $\theta\mathbf{x}_1+(1-\theta)\mathbf{x}_2\in S$. So $S$ i.e. the Ellipsoids is a convex set.\\
 
 
+(3) $\forall A,B\in S_+^{n\times n}$, we have $A^T=A,B^T=B$, and $\forall \mathbf{y}\in\mathbb{R}^n, \mathbf{y}^TA\mathbf{y}\geq 0, \mathbf{y}^TB\mathbf{y}\geq 0$.\\
+So $\forall\theta\in[0,1]$, we have $$(\theta A+(1-\theta)B)^T=\theta A^T+(1-\theta)B^T=\theta A+(1-\theta)B$$
+And $$\mathbf{y}^T(\theta A+(1-\theta)B)\mathbf{y}=\theta\mathbf{y}^TA\mathbf{y}+(1-\theta)\mathbf{y}^TB\mathbf{y}\geq 0$$
+So $\theta A+(1-\theta)B$ is symmetric and semi-positive defined.\\
+So $\theta A+(1-\theta)B\in S_+^{n\times n}$.\\
 
+So above all, we have proved that $S_+^{n\times n}$ is a convex set.\\
 
-(2)
+(4) Let $\mathcal{C}=\Big\{x~\vert~\|x-x_0\|_2\leq\|x-y\|_2~\text{for all}~y\in S\Big\}$.\\
+$\forall\mathbf{x}\in\mathcal{C}$, and for a fixed $\mathbf{y}$, we have
+\begin{align*}
+    \|\mathbf{x}-\mathbf{x}_0\|_2 &\leq \|\mathbf{x}-\mathbf{y}\|_2 \\
+    \|\mathbf{x}-\mathbf{x}_0\|_2^2 &\leq \|\mathbf{x}-\mathbf{y}\|_2^2 \\
+    (\mathbf{x}-\mathbf{x}_0)^T(\mathbf{x}-\mathbf{x}_0) &\leq (\mathbf{x}-\mathbf{y})^T(\mathbf{x}-\mathbf{y})\\
+    \mathbf{x}^T(\mathbf{x}_0-\mathbf{y}) &\geq \dfrac{1}{2}(\mathbf{x}_0^T\mathbf{x}_0-\mathbf{y}^T\mathbf{y})
+\end{align*}
 
+From the definition, we know that for a fixed $\mathbf{y}$, 
+$\mathbf{x}^T(\mathbf{x}_0-\mathbf{y}) \geq \dfrac{1}{2}(\mathbf{x}_0^T\mathbf{x}_0-\mathbf{y}^T\mathbf{y})$ is a half-space $S_{\mathbf{y}}$.\\
 
-
-(3)
-
-
-
-(4)
-
-
-
+So $\forall\mathbf{y}\in S$, we could see that $\mathcal{C}=\bigcap\limits_{\mathbf{y}\in S}S_{\mathbf{y}}$.\\
+And since each $S_y$ is a half-space, which is a convex set. And from the theorem we have known, that 
+the intersection of convex sets is also a convex set, so $\mathcal{C}$ is a convex set.
 
 
 \newpage
@@ -153,13 +213,16 @@
 $$
 \|y\|_*=\sup_{x\in\mathbf{R}^n} \{y^T x\mid\|x\|\leq1\}.
 $$ 
-Show that the dual of Euclidean norm is the Euclidean mom, i.e., $\sup_{x \in \mathbf{R}^n}\{z^{T}x \;| \;\|x\|_2\leq1\}=||z||_{2}.$\\
+Show that the dual of Euclidean norm is the Euclidean norm, i.e., $\sup\limits_{x \in \mathbf{R}^n}\{z^{T}x \;| \;\|x\|_2\leq1\}=||z||_{2}$.
 
+\begin{align*}
+    &\ \ \ \ \mathbf{z}^T\mathbf{x}\\
+    &\leq \|\mathbf{z}\|_2\|\mathbf{x}\|_2\\  
+    &\leq \|\mathbf{z}\|_2
+\end{align*}
 
-
-
-
-
+If and only if $\|\mathbf{x}\|_2=1$ and $<\mathbf{z},\mathbf{x}>=1$ will take the equation condition.\\
+So above all, we have proved that $\sup\limits_{x \in \mathbf{R}^n}\{z^{T}x \;| \;\|x\|_2\leq1\}=\|z\|_{2}$.
 
 \newpage
 
@@ -170,11 +233,17 @@ $$
 
 Show that the norm cone is convex by using the definition of convex sets.\\
 
+$\forall (x_1,t_1),(x_2,t_2)\in \mathcal{C}$, we have $\|x_1\|\leq t_1, \|x_2\|\leq t_2, t_1\geq 0,t_2\geq 0$.\\
+And $\forall\theta\in [0,1]$, we have
+\begin{align*}
+    &\ \ \ \ \|\theta x_1+(1-\theta)x_2\|\\
+    &\leq \|\theta x_1\|+\|(1-\theta)x_2\|\\
+    &= \theta t_1+(1-\theta)t_2
+\end{align*}
 
+So $\theta(x_1,t_1)+(1-\theta)(x_2,t_2)=(\theta x_1+(1-\theta)x_2,\theta t_1+(1-\theta)t_2)\in \mathcal{C}$.\\
 
-
-
-
+So above all, we have proved that $\mathcal{C}$ is a convex set.\\
 
 
 \newpage
@@ -193,37 +262,91 @@ Show that the norm cone is convex by using the definition of convex sets.\\
     \end{equation*}
 \end{itemize}
 
-(a)
+\begin{itemize}
+    \item $ (a) \Rightarrow (c)$\\
+    $\forall x,y\in C$, we have $(x,f(x)),(y,f(y))\in \text{epi}(f)$.\\
+    From (a), we have known that epi$(f)$ is convex, so $\forall\lambda\in [0,1]$, we have 
+    $$((1-\lambda)x+\lambda y, (1-\lambda)f(x)+\lambda f(y))\in\text{epi}(f)$$
+    which means that
+    $$f((1-\lambda)x+\lambda y)\leq (1-\lambda)f(x)+\lambda f(y)$$
+    So $ (a) \Rightarrow (c)$ has been proved.\\
+    
+    \item $ (c) \Rightarrow (a)$\\
+    $\forall\mathbf{x},\mathbf{y}\in C$, and $\forall(\mathbf{x},t_1),(\mathbf{y},t_2)\in\text{epi}(f)$, we have $t_1\geq f(\mathbf{x}),t_2\geq f(\mathbf{y})$.\\
+    And $\forall\lambda\in[0,1]$, we have
+    \begin{align*}
+        &\ \ \ \ f((1-\lambda)\mathbf{x}+\lambda\mathbf{y})\\
+        &\leq (1-\lambda)f(\mathbf{x})+\lambda f(\mathbf{y})\\
+        &\leq (1-\lambda)t_1+\lambda t_2
+    \end{align*}
+    So $((1-\lambda)\mathbf{x}+\lambda \mathbf{y},(1-\lambda)t_1+\lambda t_2)\in\text{epi}(f)$, so $\text{epi}(f)$ is convex.\\
+    So $ (c) \Rightarrow (a)$ has been proved.\\
+    
+    \item $ (b) \Rightarrow (c)$\\
+    Let $n=2,\lambda_1=1-\lambda,\lambda_2=\lambda$, then we have
+    $$f((1-\lambda)x+\lambda y)\leq (1-\lambda)f(x)+\lambda f(y)$$
+    So $ (b) \Rightarrow (c)$ has been proved.\\
+    
+    \item $ (c) \Rightarrow (b)$\\
+    When $n=2$, let $\lambda_1=1-\lambda,\lambda_2=\lambda$, then we have
+    $$f\Big(\sum\limits_{i=1}^n \lambda_ix_i\Big)\leq \sum\limits_{i=1}^n \lambda_if(x_i)$$
 
+    When $n=3$, $\forall\mathbf{x},\mathbf{y},\mathbf{z}\in C, \theta_1,\theta_2\in[0,1]$, we have
+    $$f((1-\theta_1)\mathbf{x}+\theta_1\mathbf{y})\leq (1-\theta_1)f(\mathbf{x})+\theta_1f(\mathbf{y})$$
+    $$f((1-\theta_2)\mathbf{x}+\theta_2\mathbf{z})\leq (1-\theta_2)f(\mathbf{x})+\theta_2f(\mathbf{z})$$
+    Let $\mathbf{a}=(1-\theta_1)\mathbf{x}+\theta_1\mathbf{y}, \mathbf{b}=(1-\theta_2)\mathbf{x}+\theta_2\mathbf{z}$, from the definition of convex set, we could know that $\mathbf{a},\mathbf{b}\in C$.\\
+    So $\dfrac{1}{2}\mathbf{a}+\dfrac{1}{2}\mathbf{b}\in C$, so we have
+    \begin{align*}
+        f(\dfrac{1}{2}\mathbf{a}+\dfrac{1}{2}\mathbf{b}) &\leq \dfrac{1}{2}f(\mathbf{a})+\dfrac{1}{2}f(\mathbf{b})\\
+        f(\dfrac{1}{2}[(1-\theta_1)\mathbf{x}+\theta_1\mathbf{y}]+\dfrac{1}{2}[(1-\theta_2)\mathbf{x}+\theta_2\mathbf{z}]) &\leq \dfrac{1}{2}[(1-\theta_1)f(\mathbf{x})+\theta_1f(\mathbf{y})]+\dfrac{1}{2}[(1-\theta_2)f(\mathbf{x})+\theta_2f(\mathbf{z})]\\
+        f((1-\dfrac{\theta_1}{2}-\dfrac{\theta_2}{2})\mathbf{x}+\dfrac{\theta_1}{2}\mathbf{y}+\dfrac{\theta_2}{2}\mathbf{z}) &\leq (1-\dfrac{\theta_1}{2}-\dfrac{\theta_2}{2})f(\mathbf{x})+\dfrac{\theta_1}{2}f(\mathbf{y})+\dfrac{\theta_2}{2}f(\mathbf{z})
+    \end{align*}
+    Let $\lambda_1=1-\dfrac{\theta_1}{2}-\dfrac{\theta_2}{2},\lambda_2=\dfrac{\theta_1}{2},\lambda_3=\dfrac{\theta_2}{2}$, then we have $\lambda_1+\lambda_2+\lambda_3=1$, and
+    $$f\Big(\sum\limits_{i=1}^n \lambda_ix_i\Big)\leq \sum\limits_{i=1}^n \lambda_if(x_i)$$
 
+    Similarly, $\forall n>3$, we could use the similar method to prove that $ (c) \Rightarrow (b)$.
+    
+\end{itemize}
 
-
-
-(b)
-
-
-
-
-
-(c)
-
-
-
-
-
-
+Since $(a)\Leftrightarrow(c)$ and $(b)\Leftrightarrow(c)$, so we could say that (a),(b),(c) three statements are equivalent.\\
 
 \newpage
 
 \item {\color{red} (14 pts)} {Monotone Mappings. A function $\psi:\mathbf{R}^n \to \mathbf{R}^n$ is called monotone if for all $x,y \in \mathbf{dom} \psi$,
-    $$(\psi(x) - \psi (y))^T (x-y) >= 0$$
-Suppose $f : \mathbf{R}^n \to \mathbf{R}^n$ is a differentiable convex function. Show that its gradient $\nabla f$ is monotone. Is the convex true, i.e., is every monotone mapping the gradient of a convex function?}\\
+    $$(\psi(x) - \psi (y))^T (x-y) \geq 0$$
+Suppose $f : \mathbf{R}^n \to \mathbf{R}^n$ is a differentiable convex function. Show that its gradient $\nabla f$ is monotone. Is the converse true, i.e., is every monotone mapping the gradient of a convex function?}\\
 
+1. If $f$ is a differentiable convex function, we could know that $\forall\mathbf{x},\mathbf{y}\in\mathbf{R}^n$,
+\begin{align*}
+    f(\mathbf{y}) &\geq f(\mathbf{x})+\nabla f(\mathbf{x})^T(\mathbf{y}-\mathbf{x})\\
+    f(\mathbf{x}) &\geq f(\mathbf{y})+\nabla f(\mathbf{y})^T(\mathbf{x}-\mathbf{y})
+\end{align*}
+Add these two inequality, we will get that
+\begin{align*}
+    \nabla f(\mathbf{x})^T(\mathbf{y}-\mathbf{x})+\nabla f(\mathbf{y})^T(\mathbf{x}-\mathbf{y}) &\leq 0\\
+    \nabla f(\mathbf{x})^T(\mathbf{x}-\mathbf{y})-\nabla f(\mathbf{y})^T(\mathbf{x}-\mathbf{y}) &\geq 0\\
+    (\nabla f(\mathbf{x})-\nabla f(\mathbf{y}))^T(\mathbf{x}-\mathbf{y}) &\geq 0
+\end{align*}
 
+So we have proved that a differentiable convex function's gradient $\nabla f$ is monotone.\\
 
+2. Suppose that $\psi(x_1,x_2)=(-x_2,x_1)$.\\
+Let $\mathbf{x}=(x_1,x_2)$ and $\mathbf{y}=(y_1,y_2)$, then
+\begin{align*}
+    (\psi(\mathbf{x})-\psi(\mathbf{y}))^T(\mathbf{x}-\mathbf{y}) &= [(-x_2,x_1)-(-y_2,y_1)]^T[(x_1,x_2)-(y_1,y_2)]\\
+    &= (-x_2+y_2,x_1-y_1)^T[(x_1-y_1,x_2-y_2)]\\
+    &= (x_1-y_1)\cdot (x_2-y_2) + (x_1-y_1)\cdot [-(x_2-y_2)]\\
+    &= 0\\
+    &\geq 0
+\end{align*}
+So our constructed $\psi(\mathbf{x})$ is monotone.\\
+Let $f$ be the primitive function of $\psi$, then $\dfrac{\partial^2f}{\partial x_1\partial x_2}=-1, \dfrac{\partial^2f}{\partial x_2\partial x_1}=1$.\\
 
+But for a differentiable convex function $f$, it must have $\dfrac{\partial^2 f}{\partial x_1\partial x_2}=\dfrac{\partial^2 f}{\partial x_2\partial x_1}$.\\
 
+So for a monotone fuction, it may not a gradient of a differentianle convex function.
 
+So above all, differentiable convex function's gradient $\nabla f$ is monotone, but its converse is not true.\\
 
 \newpage
 
@@ -241,23 +364,65 @@ Suppose $f : \mathbf{R}^n \to \mathbf{R}^n$ is a differentiable convex function.
     \item[3)] $f_3(x,u,v)=-\log(uv-x^Tx)$ on ${\bf dom} f =\{(x,u,v)|uv>x^Tx,~~u,v>0\}$.
 \end{itemize}
 
-(1)
+
+(1) We could see that $f_1$ is twice continuously differentiable over dom $f_1$ and its Hessian matrix is that:
+$$
+\nabla^2 f_1(\mathbf{x})=\dfrac{-(x_1x_2\cdots x_n)^{\frac{1}{n}}}{n^2}\left[\begin{array}{cccc}
+\frac{1-n}{x_1^2} & \frac{1}{x_1 x_2} & \cdots & \frac{1}{x_1 x_n} \\
+\frac{1}{x_2 x_1} & \frac{1-n}{x_2^2} & \cdots & \frac{1}{x_2 x_n} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{1}{x_n x_1} & \frac{1}{x_1 x_2} & \cdots & \frac{1-n}{x_n^2}
+\end{array}\right]
+$$
+
+And $\forall \mathbf{x}\in\text{dom} f_1,\mathbf{y}\in\mathbb{R}^n$, we have
+
+\begin{align*}
+    \mathbf{y}^T\nabla^2 f_1(x)\mathbf{y} &= \dfrac{-(x_1x_2\cdots x_n)^{\frac{1}{n}}}{n^2}\cdot \left[\sum_{i=1}^n\dfrac{y_i^2(1-n)}{x_i^2}+\sum_{i\neq j}\dfrac{y_iy_j}{x_ix_j}\right] \\
+    &= \dfrac{-(x_1x_2\cdots x_n)^{\frac{1}{n}}}{n^2}\cdot \left[\left(\sum_{i=1}^n\dfrac{y_i}{x_i}\right)^2-n\sum_{i=1}^n\left(\dfrac{y_i}{x_i}\right)^2\right]
+\end{align*}
+
+From the multivariate mean inequality, we could know that
+$$\left(\dfrac{\sum_{i=1}^na_i}{n}\right)^2\leq \dfrac{1}{n}\sum_{i=1}^na_i^2 \Rightarrow \left(\sum_{i=1}^na_i\right)^2\leq n\sum_{i=1}^na_i^2$$
+
+So we could know that 
+$$\left[\left(\sum_{i=1}^n\dfrac{y_i}{x_i}\right)^2-n\sum_{i=1}^n\left(\dfrac{y_i}{x_i}\right)^2\right]\leq 0$$
+And since $\dfrac{-(x_1x_2\cdots x_n)^{\frac{1}{n}}}{n^2}<0$, so we could know that
+$$\forall\mathbf{x}\in\text{dom} f_1,\mathbf{y}\in\mathbb{R}^n, \mathbf{y}^T\nabla^2 f_1(x)\mathbf{y}\geq 0$$
+
+So above all, $f_1(x_1,\cdots,x_n)$ is convex.\\
 
 
+(2) The Hessian of $f_2$ is that:
+\begin{align*}
+\nabla^2 f_2(x) & =\left[\begin{array}{cc}
+\alpha(\alpha-1) x_1^{\alpha-2} x_2^{1-\alpha} & \alpha(1-\alpha) x_1^{\alpha-1} x_2^{-\alpha} \\
+\alpha(1-\alpha) x_1^{\alpha-1} x_2^{-\alpha} & (1-\alpha)(-\alpha) x_1^\alpha x_2^{-\alpha-1}
+\end{array}\right] \\
+& =\alpha(\alpha-1) x_1^\alpha x_2^{1-\alpha}
+\left[\begin{array}{cc}
+\frac{1}{x_1^2} & -\frac{1}{x_1x_2} \\
+-\frac{1}{x_1x_2} & \frac{1}{x_2^2}
+\end{array}\right]
+\end{align*}
+
+So $\forall\mathbf{y}=(y_1,y_2)$, we have
+$$\mathbf{y}^T\nabla^2f_2(\mathbf{x})\mathbf{y}=\alpha(\alpha-1) x_1^\alpha x_2^{1-\alpha}\left(\dfrac{y_1}{x_1}-\dfrac{y_2}{x_2}\right)^2\leq 0$$
+
+So above all, $f_2(x_1,x_2)$ is concave.\\
 
 
-(2)
+(3) $f_3(\mathbf{x}, u, v)=-\log(uv-\mathbf{x}^T\mathbf{x})=-\log u-\log \left(v-\dfrac{\mathbf{x}^T\mathbf{x}}{u}\right)$.\\
+From we have known about the perspective: if $f(\mathbf{x})$ is convex, then its perspective $g(\mathbf{x},t)=tf\left(\dfrac{\mathbf{x}}{t}\right)$ is convex.\\
+Since $f(\mathbf{x})=\mathbf{x}^T\mathbf{x}$ is convex, so $g(\mathbf{x},t)=\dfrac{\mathbf{x}^T\mathbf{x}}{t}$ is convex.\\
+And since $v$ is affine, $-\dfrac{\mathbf{x}^T\mathbf{x}}{t}$ is concave, so $\left(v-\dfrac{\mathbf{x}^T\mathbf{x}}{u}\right)$ is concave.\\
 
+Since $h(x)=-\log x$ is convex and non-increasing, $\left(v-\dfrac{\mathbf{x}^T\mathbf{x}}{u}\right)$ is concave, so from the composition with scalar functions, we could know that
+$-\log \left(v-\dfrac{\mathbf{x}^T\mathbf{x}}{u}\right)$ is convex.\\
 
+Also, since $-\log u$ is convex, so $f_3(\mathbf{x}, u, v)=-\log u-\log \left(v-\dfrac{\mathbf{x}^T\mathbf{x}}{u}\right)$ is convex.\\
 
-
-(3)
-
-
-
-
-
-
+So above all, $f_3(\mathbf{x}, u, v)$ is convex.\\
 
 \end{enumerate}
 
