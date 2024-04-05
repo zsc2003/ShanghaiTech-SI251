@@ -1,0 +1,41 @@
+\item {\color{red} (50 pts)} \textbf{Robust quadratic programming}. In the lecture, we have learned about robust linear programming as an application of second-order cone programming. Now we will consider a similar robust variation of the convex quadratic program
+$$
+\begin{array}{ll}
+\operatorname{minimize} & (1 / 2) x^T P x+q^T x+r \\
+\text { subject to } & A x \preceq b .
+\end{array}
+$$
+
+For simplicity, we assume that only the matrix $P$ is subject to errors, and the other parameters $(q, r, A, b)$ are exactly known. The robust quadratic program is defined as
+$$
+\begin{array}{cl}
+\operatorname{minimize} & \sup _{P \in \mathcal{E}}\left((1 / 2) x^T P x+q^T x+r\right) \\
+\text { subject to } & A x \prec b
+\end{array}
+$$
+where $\mathcal{E}$ is the set of possible matrices $P$.\\
+For each of the following sets $\mathcal{E}$, express the robust QP as a convex problem in a standard form (e.g., QP, QCQP, SOCP, SDP).
+\begin{itemize}
+    \item[(a)] A finite set of matrices: $\mathcal{E}=\left\{P_1, \ldots, P_K\right\}$, where $P_i \in S_{+}^n, i=1, \ldots, K$.
+    \item[(b)] A set specified by a nominal value $P_0 \in S_{+}^n$ plus a bound on the eigenvalues of the deviation $P-P_0$:
+    $$
+    \mathcal{E}=\left\{P \in \mathbf{S}^n \mid-\gamma I \preceq P-P_0 \preceq \gamma I\right\}
+    $$
+    where $\gamma \in \mathbf{R}$ and $P_0 \in \mathbf{S}_{+}^n$.
+
+    \item[(c)] An ellipsoid of matrices:
+    $$
+    \mathcal{E}=\left\{P_0+\sum_{i=1}^K P_i u_i \mid\|u\|_2 \leq 1\right\} .
+    $$
+
+    You can assume $P_i \in \mathbf{S}_{+}^n, i=0, \ldots, K$.
+\end{itemize}
+
+\solution{}
+
+
+
+
+
+
+\newpage
