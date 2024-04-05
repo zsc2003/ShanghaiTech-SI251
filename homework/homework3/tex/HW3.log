@@ -1,10 +1,10 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.3.6)  5 APR 2024 21:20
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.3.6)  5 APR 2024 21:29
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**HW2
-(./HW2.tex
+**HW3
+(./HW3.tex
 LaTeX2e <2022-11-01> patch level 1
 L3 programming layer <2023-02-22> (c:/texlive/2023/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
@@ -385,8 +385,9 @@ File: l3backend-xetex.def 2023-01-16 L3 backend support: XeTeX
 \g__pdf_backend_object_int=\count308
 \g__pdf_backend_annotation_int=\count309
 \g__pdf_backend_link_int=\count310
-) (./HW2.aux)
-\openout1 = `HW2.aux'.
+)
+No file HW3.aux.
+\openout1 = `HW3.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 61.
 LaTeX Font Info:    ... okay on input line 61.
@@ -398,7 +399,7 @@ LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 61.
 LaTeX Font Info:    ... okay on input line 61.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 61.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 61.
- (c:/texlive/2023/texmf-dist/tex/latex/base/ts1cmr.fd
+(c:/texlive/2023/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 61.
@@ -477,12 +478,14 @@ LaTeX Font Info:    ... okay on input line 61.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 61.
 LaTeX Font Info:    ... okay on input line 61.
 Package hyperref Info: Link coloring OFF on input line 61.
- (./HW2.out) (./HW2.out)
 \@outlinefile=\write3
-\openout3 = `HW2.out'.
+\openout3 = `HW3.out'.
+
+
+
+Package hyperref Warning: Rerun to get /PageLabels entry.
 
 \c@lstlisting=\count311
-
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -526,17 +529,26 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 72.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-] (./problem/p1.tex [2]) (./problem/p2.tex) [3] (./HW2.aux)
-Package rerunfilecheck Info: File `HW2.out' has not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+] (./problem/p1.tex [2]) (./problem/p2.tex
+File: ./image/backtracking.png Graphic file (type bmp)
+<./image/backtracking.png>
+) [3] (./HW3.aux)
+
+Package rerunfilecheck Warning: File `HW3.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `HW3.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13497 strings out of 476683
- 205853 string characters out of 5807576
- 1850012 words of memory out of 5000000
- 33531 multiletter control sequences out of 15000+600000
- 519974 words of font info for 69 fonts, out of 8000000 for 9000
+ 13490 strings out of 476683
+ 205812 string characters out of 5807576
+ 1846012 words of memory out of 5000000
+ 33533 multiletter control sequences out of 15000+600000
+ 519031 words of font info for 64 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 72i,9n,76p,322b,442s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,8n,76p,338b,438s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on HW2.pdf (3 pages).
+Output written on HW3.pdf (3 pages).
