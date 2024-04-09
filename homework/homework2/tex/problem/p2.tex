@@ -9,10 +9,10 @@ $$
 \solution{}
 Since $\log x$ is a concave function, so $-\log x$ is a convex funciton, so the objective function is a convex function.\\
 And the constrains are affain constrains.\\
-So we can use $\lambda\in\mathbb{R}^n$ as multiplers for the inequality constrains, and $\nu\in\mathbb{R}$ as multiplier for equality constrain.\\
+So we can use $\lambda\in\mathbb{R}^n$ as multipliers for the inequality constrains, and $\nu\in\mathbb{R}$ as multiplier for equality constrain.\\
 So the Lagrangian function is
 \begin{align*}
-    L(\mathbf{x},\lambda, \nu) &= \sum_{i=1}^n\log(\alpha_i+x_i)-\lambda^T\mathbf{x}+\nu(\mathbf{1}^T\mathbf{x}-1)\\
+    L(\mathbf{x},\lambda, \nu) &= -\sum_{i=1}^n\log(\alpha_i+x_i)-\lambda^T\mathbf{x}+\nu(\mathbf{1}^T\mathbf{x}-1)\\
     \nabla_{\mathbf{x}} L(\mathbf{x},\mathbf{\lambda},\nu) &=-\sum_{i=1}^n\dfrac{1}{\alpha_i+x_i}-\lambda+\nu\mathbf{1}
 \end{align*}
 
@@ -27,27 +27,29 @@ x \succeq 0, \quad \mathbf{1}^T x=1 & (1) & \text{primal feasibility} \\
 $$
 
 From (4), we can get that:
-$$\forall i=1,2,\cdots,n\ \ \ \dfrac{1}{\alpha_i+x_i}-\lambda_i+\nu=0$$
-i.e. $$x_i=-\alpha_i-\dfrac{1}{\lambda_i+\nu}$$
+$$\forall i=1,2,\cdots,n\ \ \ -\dfrac{1}{\alpha_i+x_i}-\lambda_i+\nu=0$$
+i.e. $$x_i=-\alpha_i-\dfrac{1}{\lambda_i-\nu}$$
 
 From (3), we can get that:\\
 1. from (2), we have $\lambda_i\geq 0$, so
 $$x_i=0 \Leftrightarrow \lambda_i=\nu-\dfrac{1}{\alpha_i} \geq 0 \Leftrightarrow \nu\geq\dfrac{1}{\alpha_i}$$
 2. from (1), we have $x_i\geq 0$, so
-$$x_i\neq 0 \Leftrightarrow \lambda_i=0 \Leftrightarrow \dfrac{1}{\nu}=x_i+\alpha_i\geq 0 \text{\ \ \ \ \ \ <1>}$$
+$$x_i\neq 0 \Leftrightarrow \lambda_i=0 \Leftrightarrow \dfrac{1}{\nu}=x_i+\alpha_i\geq \alpha_i \text{\ \ \ \ \ \ <1>}$$
 From the domain of the $\log$ function, we could get that 
 $$\alpha_i+x_i>0 \Leftrightarrow \dfrac{1}{\nu} > 0 \Leftrightarrow \nu > 0 \text{\ \ \ \ \ \ \ \ \ \ \ \ \ <2>}$$
 Combine <1> and <2>, we can get that 
+i. if $\alpha_i\leq 0$, then $\nu\geq\dfrac{1}{\alpha_i}$ always holds, with is the same situation with 1.\\
+ii. if $\alpha_i>0$, then
 $$x_i\neq 0 \Leftrightarrow \nu\leq\dfrac{1}{\alpha_i}$$
 
 So conclude the information we get from (3), we know that:\\
 1. if $\nu\geq\dfrac{1}{\alpha_i}$, then $x_i=0$\\
-2. if $\nu\leq\dfrac{1}{\alpha_i}$, then $x_i=\dfrac{1}{\nu}-\alpha_i\geq 0$\\
+2. if $\nu<\dfrac{1}{\alpha_i}$, then $x_i=\dfrac{1}{\nu}-\alpha_i\geq 0$\\
 So we could see that $x_i=\max\{\dfrac{1}{\nu}-\alpha_i,0\}$
 
 From (1), we could get that
 $$\mathbf{1}^T\mathbf{x}=\sum_{i=1}^nx_i=\sum_{i=1}^n\max\{\dfrac{1}{\nu}-\alpha_i,0\}=1$$
 Since $\alpha_i$ are fixed constants, so we could calculate $\nu$ with the above formula.\\
-
-So above all, after getting the $\nu$, we could get that the optimal solution for the objective function is that
+So above all, after getting the $\nu$, we could get that the variables to make the optimal solution is that $$x_i==\max\{\dfrac{1}{\nu}-\alpha_i,0\}, i=1,\cdots,n$$
+and the optimal solution for the objective function is that
 $$\min \text{obj} = -\sum_{i=1}^n\log \left(\alpha_i+\max\{ 0, \dfrac{1}{\nu}-\alpha_i \} \right)$$

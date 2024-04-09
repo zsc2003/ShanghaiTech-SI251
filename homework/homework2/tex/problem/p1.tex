@@ -40,7 +40,7 @@ So the program can be rewriten as
 \begin{align*}
     \min_{\mathbf{x},t}\ \ \ \ \ & t+q^T \mathbf{x}+r \\
     \text {subject to }\ \ \ \ \ & A \mathbf{x} \preceq b\\
-    & \dfrac{1}{2}\mathbf{x}^TP_i\mathbf{x}\leq t
+    & \dfrac{1}{2}\mathbf{x}^TP_i\mathbf{x}\leq t,\ \ \ i=1, \ldots, K
 \end{align*}
 The objective function is linear to the variable $(\mathbf{x},t)$, and the constrains are in quadratic form.\\
 So above all, the problem is a QCQP.\\
@@ -57,9 +57,7 @@ So the program can be rewriten as
     \min_{\mathbf{x}}\ \ \ \ \ & \dfrac{1}{2}\mathbf{x}^T(P_0+\gamma I)\mathbf{x}+q^T \mathbf{x}+r \\
     \text {subject to }\ \ \ \ \ & A \mathbf{x} \preceq b
 \end{align*}
-
 The objective function is in the quadratic form to the variable $\mathbf{x}$, and the constrains are in linear form.\\
-
 So above all, the problem is a QP.\\
 
 (c) We can define $y_i=x^T P_i x$, then we have:
@@ -80,17 +78,17 @@ Then the current simplified problem is that
     \text {subject to }\ \ \ \ \ & A \mathbf{x} \preceq b \\
     & t = \dfrac{1}{2}\|y\|_2 \\
     & u = \dfrac{1}{2}x^TP_0x \\
-    & y_i = x^TP_ix \ \ \ \forall i=1,\cdots,K \\
+    & y_i = x^TP_ix \ \ \ \forall i=1,\cdots,K
 \end{align*}
 We could find that the closest form for the problem is the SOCP, but has some difference, so we need to do some conversions.\\
-Since $u,t$ are seperated and independent, and the transmissibility of the inequality, to better suit SOCP, we could let
+Since $u,t$ are seperated and independent, and the transmissibility of the inequality, to better suit SOCP, we could do the scalings, which would led to the same result as taking minimum:
 \begin{align*}
     t = \dfrac{1}{2}\|y\|_2 &\Rightarrow t \geq \dfrac{1}{2}\|y\|_2\\
     u = \dfrac{1}{2}x^TP_0x &\Rightarrow u \geq \dfrac{1}{2}x^TP_0x\\
     y_i = x^TP_ix &\Rightarrow y_i \geq x^TP_ix \ \ \ \forall i=1,\cdots,K
 \end{align*} 
 Since $P_i \in \mathbf{S}_{+}^n, i=0, \ldots, K$, so we could do eigenvalue decomposition to each matrix, which are diagonalizable due to the symmetry.
-$P_i=Q_i^{-1}\Lambda_iQ_i$, and for all eigenvalues in $Lambda_i$ is non-negative, so we have $P_i^{\frac{1}{2}}=Q_i^{-1}\Lambda_i^{\frac{1}{2}}Q_i$.\\
+$P_i=Q_i^{-1}\Lambda_iQ_i$, and for all eigenvalues in $\Lambda_i$ is non-negative, so we have $P_i^{\frac{1}{2}}=Q_i^{-1}\Lambda_i^{\frac{1}{2}}Q_i$.\\
 And construct an inequality:
 $$\left\|
 \left[\begin{array}{l}
