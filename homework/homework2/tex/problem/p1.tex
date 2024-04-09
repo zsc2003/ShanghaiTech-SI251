@@ -10,7 +10,7 @@ For simplicity, we assume that only the matrix $P$ is subject to errors, and the
 $$
 \begin{array}{cl}
 \operatorname{minimize} & \sup _{P \in \mathcal{E}}\left((1 / 2) x^T P x+q^T x+r\right) \\
-\text { subject to } & A x \preceq b
+\text {subject to } & A x \preceq b
 \end{array}
 $$
 where $\mathcal{E}$ is the set of possible matrices $P$.\\
@@ -32,10 +32,116 @@ For each of the following sets $\mathcal{E}$, express the robust QP as a convex 
 \end{itemize}
 
 \solution{}
+Since $\sup\limits_{P \in \mathcal{E}}\left(\dfrac{1}{2} x^T P x+q^T x+r\right)=\left(\sup\limits_{P \in \mathcal{E}}\dfrac{1}{2} x^T P x\right)+q^T x+r$, so we could need to consider the $\sup\limits_{P \in \mathcal{E}}\dfrac{1}{2} x^T P x$ part of the objective function.\\
 
+(a) Let $$t=\sup\limits_{P\in\mathcal{E}}\dfrac{1}{2}\mathbf{x}^TP\mathbf{x}$$
+i.e. $$\forall i=1,\cdots,K,\ \dfrac{1}{2}\mathbf{x}^TP_i\mathbf{x}\leq t$$
+So the program can be rewriten as
+\begin{align*}
+    \min_{\mathbf{x},t}\ \ \ \ \ & t+q^T \mathbf{x}+r \\
+    \text {subject to }\ \ \ \ \ & A \mathbf{x} \preceq b\\
+    & \dfrac{1}{2}\mathbf{x}^TP_i\mathbf{x}\leq t
+\end{align*}
+The objective function is linear to the variable $(\mathbf{x},t)$, and the constrains are in quadratic form.\\
+So above all, the problem is a QCQP.\\
 
+(b) $\forall P\in\mathcal{E}$, we have
+$$-\gamma I \preceq P-P_0 \preceq \gamma I$$
+which means that $\forall\mathbf{x}\in\mathbb{R}^n$, we have
+$$\mathbf{x}^T (-\gamma I) \mathbf{x}\leq \mathbf{x}^T(P-P_0)\mathbf{x} \leq  \mathbf{x}^T(\gamma I)\mathbf{x}$$
+i.e.
+$$\mathbf{x}^T (P_0-\gamma I) \mathbf{x}\leq \mathbf{x}^TP\mathbf{x} \leq \mathbf{x}^T(P_0+\gamma I)\mathbf{x}$$
 
+So the program can be rewriten as
+\begin{align*}
+    \min_{\mathbf{x}}\ \ \ \ \ & \dfrac{1}{2}\mathbf{x}^T(P_0+\gamma I)\mathbf{x}+q^T \mathbf{x}+r \\
+    \text {subject to }\ \ \ \ \ & A \mathbf{x} \preceq b
+\end{align*}
 
+The objective function is in the quadratic form to the variable $\mathbf{x}$, and the constrains are in linear form.\\
 
+So above all, the problem is a QP.\\
+
+(c) We can define $y_i=x^T P_i x$, then we have:
+\begin{align*}
+    \sup_{P \in \mathcal{E}}\dfrac{1}{2} x^T P x &= \sup_{\|\mathbf{u}\|\leq 1}\left(\dfrac{1}{2} x^T P_0 x + \sum_{i=1}^{K}\dfrac{1}{2} u_ix^T P_i x\right) \\
+    &= \dfrac{1}{2} x^T P_0 x + \dfrac{1}{2}\sup_{\|\mathbf{u}\|\leq 1}\left(\sum_{i=1}^{K} u_ix^T P_i x\right) \\
+    &= \dfrac{1}{2} x^T P_0 x + \dfrac{1}{2}\sup_{\|\mathbf{u}\|\leq 1}\left(\sum_{i=1}^{K} u_iy_i \right) \text{\ \ \ \ \ \ \ } (y_i=x^T P_i x)\\
+    &= \dfrac{1}{2} x^T P_0 x + \dfrac{1}{2}\sup_{\|\mathbf{u}\|\leq 1}\mathbf{u}^T\mathbf{y} \\
+    &= \dfrac{1}{2} x^T P_0 x + \dfrac{1}{2}\sup_{\|\mathbf{u}\|\leq 1}\|\mathbf{u}\|_2\|\mathbf{y}\|_2 \text{\ \ \ \ \ \ \ \ \ (Cauchy Inequality)} \\
+    &= \dfrac{1}{2} x^T P_0 x + \dfrac{1}{2}\|\mathbf{y}\|_2
+\end{align*}
+So the objective function becomes $\dfrac{1}{2} x^T P_0 x + \dfrac{1}{2}\|\mathbf{y}\|_2 + q^T x+r$.\\
+Since there are no suitable programmings for existing norm in the objective function, so we can convert it into the constrains.\\
+Let $u=\dfrac{1}{2}x^TP_0x, t=\dfrac{1}{2}\|y\|_2$.\\
+Then the current simplified problem is that
+\begin{align*}
+    \min_{\mathbf{x},\mathbf{y},u,t}\ \ \ \ \ & u+t+q^T \mathbf{x}+r \\
+    \text {subject to }\ \ \ \ \ & A \mathbf{x} \preceq b \\
+    & t = \dfrac{1}{2}\|y\|_2 \\
+    & u = \dfrac{1}{2}x^TP_0x \\
+    & y_i = x^TP_ix \ \ \ \forall i=1,\cdots,K \\
+\end{align*}
+We could find that the closest form for the problem is the SOCP, but has some difference, so we need to do some conversions.\\
+Since $u,t$ are seperated and independent, and the transmissibility of the inequality, to better suit SOCP, we could let
+\begin{align*}
+    t = \dfrac{1}{2}\|y\|_2 &\Rightarrow t \geq \dfrac{1}{2}\|y\|_2\\
+    u = \dfrac{1}{2}x^TP_0x &\Rightarrow u \geq \dfrac{1}{2}x^TP_0x\\
+    y_i = x^TP_ix &\Rightarrow y_i \geq x^TP_ix \ \ \ \forall i=1,\cdots,K
+\end{align*} 
+Since $P_i \in \mathbf{S}_{+}^n, i=0, \ldots, K$, so we could do eigenvalue decomposition to each matrix, which are diagonalizable due to the symmetry.
+$P_i=Q_i^{-1}\Lambda_iQ_i$, and for all eigenvalues in $Lambda_i$ is non-negative, so we have $P_i^{\frac{1}{2}}=Q_i^{-1}\Lambda_i^{\frac{1}{2}}Q_i$.\\
+And construct an inequality:
+$$\left\|
+\left[\begin{array}{l}
+P_0^{\frac{1}{2}}x \\
+u-\dfrac{1}{2}
+\end{array}\right]\right\|_2
+\leq
+u+\dfrac{1}{2}
+$$
+If we square to the both side, we can get that
+\begin{align*}
+    \|P_0^{\frac{1}{2}}x\|_2^2+(u-\dfrac{1}{2})^2 &\leq (u+\dfrac{1}{2})^2\\
+    x^TP_0x+u^2-u+\dfrac{1}{4} &\leq u^2+u+\dfrac{1}{4} \\
+    \dfrac{1}{2}x^TP_0x &\leq u
+\end{align*}
+Similarly, in the exactly same way, we can construct
+$$\left\|
+\left[\begin{array}{l}
+P_i^{\frac{1}{2}}x \\
+y_i-\dfrac{1}{4}
+\end{array}\right]\right\|_2
+\leq
+y_i+\dfrac{1}{4}
+$$
+If we square to the both side, we can get that
+\begin{align*}
+    \|P_i^{\frac{1}{2}}x\|_2^2+(y_i-\dfrac{1}{4})^2 &\leq (y_i+\dfrac{1}{4})^2\\
+    x^TP_ix+y_i^2-\dfrac{1}{2}y_i+\dfrac{1}{16} &\leq y_i^2+\dfrac{1}{2}y_i+\dfrac{1}{16} \\
+    x^TP_ix &\leq y_i
+\end{align*}
+So the program can be rewriten as
+\begin{align*}
+    \min_{\mathbf{x},\mathbf{y},u,t}\ \ \ \ \ & u+t+q^T \mathbf{x}+r \\
+    \text {subject to }\ \ \ \ \ & A \mathbf{x} \preceq b \\
+    & \dfrac{1}{2}\|y\|_2 \leq t \\
+    & \left\|
+    \left[\begin{array}{l}
+    P_0^{\frac{1}{2}}x \\
+    u-\dfrac{1}{2}
+    \end{array}\right]\right\|_2
+    \leq
+    u+\dfrac{1}{2} \\
+    & \left\|
+    \left[\begin{array}{l}
+    P_i^{\frac{1}{2}}x \\
+    y_i-\dfrac{1}{4}
+    \end{array}\right]\right\|_2
+    \leq
+    y_i+\dfrac{1}{4}
+\end{align*}
+
+So above all, the problem is a SOCP.\\
 
 \newpage
