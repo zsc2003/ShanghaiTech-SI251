@@ -119,7 +119,7 @@ If we square to the both side, we can get that
     x^TP_ix+y_i^2-\dfrac{1}{2}y_i+\dfrac{1}{16} &\leq y_i^2+\dfrac{1}{2}y_i+\dfrac{1}{16} \\
     x^TP_ix &\leq y_i
 \end{align*}
-So the program can be rewriten as
+So the program can be rewriten as linear objective function and second-order cone constrains:
 \begin{align*}
     \min_{\mathbf{x},\mathbf{y},u,t}\ \ \ \ \ & u+t+q^T \mathbf{x}+r \\
     \text {subject to }\ \ \ \ \ & A \mathbf{x} \preceq b \\
