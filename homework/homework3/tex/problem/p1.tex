@@ -1,4 +1,4 @@
-\item {\color{red} (50 pts)} \textbf{L-smooth functions}. Suppose the function $f: \mathbb{R}^n \rightarrow \mathbb{R}$ is convex and differentiable. Please prove that the following relations holds for all $\mathbf{x}, \mathbf{y} \in \mathbb{R}$ if $f$ with an $L$-Lipschitz continuous conditions,
+\item {\color{red} (50 pts)} \textbf{L-smooth functions}. Suppose the function $f: \mathbb{R}^n \rightarrow \mathbb{R}$ is convex and differentiable. Please prove that the following relations holds for all $\mathbf{x}, \mathbf{y} \in \mathbb{R}^n$ if $f$ with an $L$-Lipschitz continuous conditions,
 $$[1] \Rightarrow[2] \Rightarrow[3]$$
 \begin{align*}
     & [1]\  \langle\nabla f(\mathbf{x})-\nabla f(\mathbf{y}), \mathbf{x}-\mathbf{y}\rangle \leq L\|\mathbf{x}-\mathbf{y}\|^2,\\
@@ -7,31 +7,67 @@ $$[1] \Rightarrow[2] \Rightarrow[3]$$
 \end{align*}
 
 \solution{}
-$[1] \Rightarrow[2]:$\\
-Define $g(t)=f()$
-
-
-
-
-
-
-
-
-
-
-
-
+\begin{itemize}
+    \item[1.] $[1] \Rightarrow[2]$.\\
+Define $$g(t)=f\left(\mathbf{x}+t(\mathbf{y}-\mathbf{x})\right),t\in[0,1]$$
+So we have $g(0)=f(\mathbf{x})$ and $g(1)=f(\mathbf{y})$, and $\nabla g(t)=\nabla f(\mathbf{x}+t(\mathbf{y}-\mathbf{x}))^T(\mathbf{y}-\mathbf{x})$.\\
+So we have:
+\begin{align*}
+    f(\mathbf{y}) - f(\mathbf{x}) -\nabla f(\mathbf{x})^T(\mathbf{y}-\mathbf{x}) &= g(1)-g(0)-\nabla f(\mathbf{x})^T(\mathbf{y}-\mathbf{x}) \\
+    &= \left(\int_{0}^{1}\nabla g(t)dt\right)-\nabla f(\mathbf{x})^T(\mathbf{y}-\mathbf{x}) \text{\ \ \ \ \ (Newton-Leibniz formula)}\\
+    &= \left(\int_{0}^{1}\nabla f(\mathbf{x}+t(\mathbf{y}-\mathbf{x}))^T(\mathbf{y}-\mathbf{x})dt\right)-\left(\int_{0}^{1}\nabla f(\mathbf{x})^T(\mathbf{y}-\mathbf{x})dt\right) \\
+    &= \int_{0}^{1}\left(\nabla f(\mathbf{x}+t(\mathbf{y}-\mathbf{x}))-\nabla f(\mathbf{x})\right)^T(\mathbf{y}-\mathbf{x})dt \\
+    &= \int_{0}^{1}\dfrac{1}{t}\langle\nabla f(\mathbf{x}+t(\mathbf{y}-\mathbf{x}))-\nabla f(\mathbf{x}),[\mathbf{x}+t(\mathbf{y}-\mathbf{x})]-\mathbf{x})\rangle dt \\
+    &\leq \int_{0}^{1}\dfrac{1}{t}L\|[\mathbf{x}+t(\mathbf{y}-\mathbf{x})]-\mathbf{x}\|^2dt \text{\ \ \ \ \ \ \ \ \ \ ($[1]$ as the condition)}\\
+    &= \int_{0}^{1}tL\|\mathbf{y}-\mathbf{x}\|^2dt \\
+    &= L\|\mathbf{y}-\mathbf{x}\|^2\cdot \int_{0}^{1}tdt \\
+    &= L\|\mathbf{y}-\mathbf{x}\|^2\cdot \dfrac{1}{2} \\
+    &= \dfrac{L}{2}\|\mathbf{y}-\mathbf{x}\|^2
+\end{align*}
+So we have proved
+$$f(\mathbf{y}) - f(\mathbf{x}) -\nabla f(\mathbf{x})^T(\mathbf{y}-\mathbf{x})\leq  \dfrac{L}{2}\|\mathbf{y}-\mathbf{x}\|^2$$
+i.e.
+$$f(\mathbf{y}) \leq f(\mathbf{x})+\nabla f(\mathbf{x})^T(\mathbf{y}-\mathbf{x})+\frac{L}{2}\|\mathbf{y}-\mathbf{x}\|^2$$
 So we have proved that $[1] \Rightarrow[2]$.
+    
 
-$[2] \Rightarrow[3]:$
-
-
-
-
-
-
-
+    \item[2. ] $[2] \Rightarrow[3]:$\\
+From [2], we could get that:
+$$f(\mathbf{y}) \leq f(\mathbf{x})+\nabla f(\mathbf{x})^T(\mathbf{y}-\mathbf{x})+\frac{L}{2}\|\mathbf{y}-\mathbf{x}\|^2$$
+In order to get the form of $[3]$, we can set $\mathbf{z}=\mathbf{x}+\dfrac{1}{L}(\nabla f(\mathbf{y})-f(\mathbf{x}))$.\\
+So we have
+\begin{align*}
+    f(\mathbf{z}) &\leq f(\mathbf{x})+\nabla f(\mathbf{x})^T(\mathbf{z}-\mathbf{x})+\frac{L}{2}\|\mathbf{z}-\mathbf{x}\|^2 \\
+    &= f(\mathbf{x})+\dfrac{1}{L}\nabla f(\mathbf{x})^T\left(\nabla f(\mathbf{y})-\nabla f(\mathbf{x})\right)+\frac{L}{2}\|\dfrac{1}{L}(\nabla f(\mathbf{y})-\nabla f(\mathbf{x}))\|^2 \\
+    &= f(\mathbf{x})+\dfrac{1}{L}\nabla f(\mathbf{x})^T\left(\nabla f(\mathbf{y})-\nabla f(\mathbf{x})\right)+\frac{1}{2L}\|(\nabla f(\mathbf{y})-\nabla f(\mathbf{x}))\|^2
+\end{align*}
+But the direction of inequality's sign is different from what we want, so we need to use the first order's term to constuct a negative one, i.e.
+\begin{align*}
+    f(\mathbf{z}) &\leq f(\mathbf{x})+\dfrac{1}{L}\nabla f(\mathbf{x})^T\left(\nabla f(\mathbf{y})-\nabla f(\mathbf{x})\right)+\frac{1}{2L}\|(\nabla f(\mathbf{y})-\nabla f(\mathbf{x}))\|^2 \\
+    f(\mathbf{z}) - f(\mathbf{x})&\leq -\dfrac{1}{L}\left(-\nabla f(\mathbf{x})\right)^T\left(\nabla f(\mathbf{y})-\nabla f(\mathbf{x})\right)+\frac{1}{2L}\|(\nabla f(\mathbf{y})-\nabla f(\mathbf{x}))\|^2 \\
+    f(\mathbf{z}) - f(\mathbf{x}) - \dfrac{1}{L}\nabla f(\mathbf{y})^T\left(\nabla f(\mathbf{y})-\nabla f(\mathbf{x})\right)&\leq -\dfrac{1}{L}\left(\nabla f(\mathbf{y})-\nabla f(\mathbf{x})\right)^T\left(\nabla f(\mathbf{y})-\nabla f(\mathbf{x})\right)+\frac{1}{2L}\|(\nabla f(\mathbf{y})-\nabla f(\mathbf{x}))\|^2 \\
+    f(\mathbf{z}) - f(\mathbf{x}) - \dfrac{1}{L}\nabla f(\mathbf{y})^T\left(\nabla f(\mathbf{y})-\nabla f(\mathbf{x})\right)&\leq -\dfrac{1}{2L}\|(\nabla f(\mathbf{y})-\nabla f(\mathbf{x}))\|^2 \\
+    \dfrac{1}{2L}\|(\nabla f(\mathbf{y})-\nabla f(\mathbf{x}))\|^2 &\leq f(\mathbf{x}) - f(\mathbf{z}) + \dfrac{1}{L}\nabla f(\mathbf{y})^T\left(\nabla f(\mathbf{y})-\nabla f(\mathbf{x})\right)\\
+    \dfrac{1}{2L}\|(\nabla f(\mathbf{y})-\nabla f(\mathbf{x}))\|^2 &\leq f(\mathbf{x}) - f(\mathbf{z}) + \nabla f(\mathbf{y})^T(\mathbf{z}-\mathbf{x}) \text{\ \ \ \ \ \ \ $\left(\mathbf{z}=\mathbf{x}+\dfrac{1}{L}(\nabla f(\mathbf{y})-f(\mathbf{x}))\right)$}
+\end{align*}
+Since $f(x)$ is convex, so we can get the first order Taylor expansion of $f(\mathbf{z})$ at $\mathbf{y}$:
+$$f(\mathbf{z}) \geq f(\mathbf{y})+\nabla f(\mathbf{y})^T(\mathbf{z}-\mathbf{y})$$
+i.e.
+$$\nabla f(\mathbf{y})^T\mathbf{z}\leq f(\mathbf{z})-f(\mathbf{y})+\nabla f(\mathbf{y})^T\mathbf{y}$$
+And put it into the above inequality, we can get:
+\begin{align*}
+    \dfrac{1}{2L}\|(\nabla f(\mathbf{y})-\nabla f(\mathbf{x}))\|^2 &\leq f(\mathbf{x}) - f(\mathbf{z}) + \nabla f(\mathbf{y})^T(\mathbf{z}-\mathbf{x}) \\
+    &= f(\mathbf{x}) - f(\mathbf{z}) + \left(f(\mathbf{z})-f(\mathbf{y})+\nabla f(\mathbf{y})^T\mathbf{y}\right) -f(\mathbf{y})^T\mathbf{x} \\
+    &= f(\mathbf{x}) - f(\mathbf{y}) + \nabla f(\mathbf{y})^T(\mathbf{y} - \mathbf{x}) \\
+\end{align*}
+i.e.
+$$f(\mathbf{y}) \geq f(\mathbf{x})+\nabla f(\mathbf{x})^T(\mathbf{y}-\mathbf{x})+\frac{1}{2 L}\|\nabla f(\mathbf{y})-\nabla f(\mathbf{x})\|^2$$
+Swap $\mathbf{x}$ and $\mathbf{y}$, we can get:
+$$f(\mathbf{x}) \geq f(\mathbf{y})+\nabla f(\mathbf{y})^T(\mathbf{x}-\mathbf{y})+\frac{1}{2 L}\|\nabla f(\mathbf{x})-\nabla f(\mathbf{y})\|^2$$
+    
 So we have proved that $[2] \Rightarrow[3]$.
+
+\end{itemize}
 
 So above all, we have proved that $[1] \Rightarrow[2] \Rightarrow[3]$.
 

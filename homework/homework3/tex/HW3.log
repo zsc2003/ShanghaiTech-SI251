@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.3.6)  14 APR 2024 20:50
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.3.6)  22 APR 2024 22:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -526,20 +526,25 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 72.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-] (./problem/p1.tex [2]) (./problem/p2.tex
+] (./problem/p1.tex [2]
+Overfull \hbox (72.57895pt too wide) detected at line 52
+[]
+ []
+
+[3]) (./problem/p2.tex
 File: ./image/backtracking.png Graphic file (type bmp)
 <./image/backtracking.png>
-) [3] (./HW3.aux)
+ [4]) [5] (./HW3.aux)
 Package rerunfilecheck Info: File `HW3.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13502 strings out of 476683
- 205919 string characters out of 5807576
- 1847012 words of memory out of 5000000
- 33536 multiletter control sequences out of 15000+600000
- 519958 words of font info for 67 fonts, out of 8000000 for 9000
+ 13508 strings out of 476683
+ 206087 string characters out of 5807576
+ 1858012 words of memory out of 5000000
+ 33538 multiletter control sequences out of 15000+600000
+ 519974 words of font info for 69 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 72i,8n,76p,356b,440s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,14n,76p,358b,522s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on HW3.pdf (3 pages).
+Output written on HW3.pdf (5 pages).
