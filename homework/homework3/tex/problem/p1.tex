@@ -57,13 +57,14 @@ $$\nabla f(\mathbf{y})^T\mathbf{z}\leq f(\mathbf{z})-f(\mathbf{y})+\nabla f(\mat
 And put it into the above inequality, we can get:
 \begin{align*}
     \dfrac{1}{2L}\|(\nabla f(\mathbf{y})-\nabla f(\mathbf{x}))\|^2 &\leq f(\mathbf{x}) - f(\mathbf{z}) + \nabla f(\mathbf{y})^T(\mathbf{z}-\mathbf{x}) \\
-    &= f(\mathbf{x}) - f(\mathbf{z}) + \left(f(\mathbf{z})-f(\mathbf{y})+\nabla f(\mathbf{y})^T\mathbf{y}\right) -f(\mathbf{y})^T\mathbf{x} \\
-    &= f(\mathbf{x}) - f(\mathbf{y}) + \nabla f(\mathbf{y})^T(\mathbf{y} - \mathbf{x}) \\
+    &\leq f(\mathbf{x}) - f(\mathbf{z}) + \left(f(\mathbf{z})-f(\mathbf{y})+\nabla f(\mathbf{y})^T\mathbf{y}\right) -f(\mathbf{y})^T\mathbf{x} \\
+    &= f(\mathbf{x}) - f(\mathbf{y}) + \nabla f(\mathbf{y})^T(\mathbf{y} - \mathbf{x})
 \end{align*}
+
 i.e.
-$$f(\mathbf{y}) \geq f(\mathbf{x})+\nabla f(\mathbf{x})^T(\mathbf{y}-\mathbf{x})+\frac{1}{2 L}\|\nabla f(\mathbf{y})-\nabla f(\mathbf{x})\|^2$$
-Swap $\mathbf{x}$ and $\mathbf{y}$, we can get:
 $$f(\mathbf{x}) \geq f(\mathbf{y})+\nabla f(\mathbf{y})^T(\mathbf{x}-\mathbf{y})+\frac{1}{2 L}\|\nabla f(\mathbf{x})-\nabla f(\mathbf{y})\|^2$$
+Swap $\mathbf{x}$ and $\mathbf{y}$, we can get:
+$$f(\mathbf{y}) \geq f(\mathbf{x})+\nabla f(\mathbf{x})^T(\mathbf{y}-\mathbf{x})+\frac{1}{2 L}\|\nabla f(\mathbf{y})-\nabla f(\mathbf{x})\|^2$$
     
 So we have proved that $[2] \Rightarrow[3]$.
 

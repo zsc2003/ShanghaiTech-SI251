@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.3.6)  22 APR 2024 22:02
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.3.6)  23 APR 2024 16:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -534,17 +534,22 @@ Overfull \hbox (72.57895pt too wide) detected at line 52
 [3]) (./problem/p2.tex
 File: ./image/backtracking.png Graphic file (type bmp)
 <./image/backtracking.png>
- [4]) [5] (./HW3.aux)
+ [4]
+Overfull \hbox (32.70744pt too wide) detected at line 70
+[]
+ []
+
+[5]) [6] (./HW3.aux)
 Package rerunfilecheck Info: File `HW3.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
  13508 strings out of 476683
  206087 string characters out of 5807576
- 1858012 words of memory out of 5000000
+ 1860012 words of memory out of 5000000
  33538 multiletter control sequences out of 15000+600000
  519974 words of font info for 69 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  72i,14n,76p,358b,522s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on HW3.pdf (5 pages).
+Output written on HW3.pdf (6 pages).
