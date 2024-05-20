@@ -1,0 +1,89 @@
+\documentclass{article}
+\usepackage{CJKutf8}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{subfigure}
+\usepackage{amsmath}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}  % Use Input in the format of Algorithm
+\renewcommand{\algorithmicensure}{\textbf{Output:}} % Use Output in the format of Algorithm
+\usepackage{listings}
+\usepackage{url}
+
+\newtheorem{theorem}{Theorem}
+
+\usepackage{etoolbox}
+\newtoggle{solution}
+\toggletrue{solution}
+% \togglefalse{solution}
+
+\usepackage{color}
+\usepackage[dvipsnames]{xcolor}
+\newcommand{\solution}[2][0pt]{\iftoggle{solution}{\smallskip{\color{blue}{\flushleft\textbf{Solution}:}\par#2}}{\vspace*{#1}}}
+
+\renewcommand{\baselinestretch}{1.2}%Adjust Line Spacing
+% \geometry{left=2.0cm,right=2.0cm,top=2.0cm,bottom=2.0cm}% Adjust Margins of the File
+\usepackage[margin=1in]{geometry}
+
+% Create horizontal rule command with an argument of height
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}}
+% Set the title here
+
+% Add the support for auto numbering
+% use \problem{title} or \problem[number]{title} to add a new problem
+% also \subproblem is supported, just use it like \subsection
+\newcounter{ProblemCounter}
+\newcounter{oldvalue}
+\newcommand{\problem}[2][-1]{
+	\setcounter{oldvalue}{\value{secnumdepth}}
+	\setcounter{secnumdepth}{0}
+	\ifnum#1>0
+		\setcounter{ProblemCounter}{#1}
+	\else
+		\stepcounter{ProblemCounter}
+	\fi
+	\section{Problem \arabic{ProblemCounter}: #2}
+	\setcounter{secnumdepth}{\value{oldvalue}}
+}
+\newcommand{\subproblem}[1]{
+	\setcounter{oldvalue}{\value{section}}
+	\setcounter{section}{\value{ProblemCounter}}
+	\subsection{#1}
+	\setcounter{section}{\value{oldvalue}}
+}
+\title{SI251 - Convex Optimization Homework 4}
+
+\author{
+    Name: \textbf{Zhou Shouchen} \\\\
+    Student ID: 2021533042
+}
+
+\begin{document}
+\date{}
+\maketitle
+\centerline{\Large \textbf{Deadline: 2024-06-12 23:59:59}}
+\vspace*{30pt}
+\begin{enumerate}
+    \item You can use Word, Latex or handwriting to complete this assignment. If you want to submit a handwritten version, scan it clearly.
+    \item The \textbf{report} has to be submitted as a PDF file to Gradescope, other formats are not accepted.
+    \item The submitted file name is \textbf{student\_id+your\_student\_name.pdf}.
+    \item Late policy: You have 4 free late days for the quarter and may use up to 2 late days per assignment with no penalty. Once you have exhausted your free late days, we will deduct a late penalty of $25\%$ per additional late day. Note: The timeout period is recorded in days, even if you delay for $1$ minute, it will still be counted as a $1$ late day.
+    \item You are required to follow ShanghaiTech’s academic honesty policies. You are not allowed to copy materials from other students or from online or published resources. Violating academic honesty can result in serious sanctions.
+\end{enumerate}
+
+\textbf{Any plagiarism will get Zero point.}
+
+\newpage
+
+\input{problem/p1.tex}
+\input{problem/p2.tex}
+\input{problem/p3.tex}
+
+\end{document}

@@ -1,0 +1,25 @@
+\section{Monotone Operators and Base Splitting Schemes}
+{\color{red} (35 pts)} Proof the theorem below:
+\begin{theorem}
+Let \(z^*\) be a solution to the monotone operator splitting problem , and define \(J\): $J = \mathbf{D}_{\text{prox}}(Wz^* + Ux + b)$ denotes the Clarke generalized Jacobian of the nonlinearity evaluated at the point \(Wz^* + Ux + b\).
+. Then for \(v \in \mathbb{R}^n\) the solution of the equation
+\begin{equation}
+u^* = (I - JW)^{-T}v
+\end{equation}
+is given by
+\begin{equation}
+u^* = v + W^T\tilde{u}^*
+\end{equation}
+where \(\tilde{u}^*\) is a zero of the operator splitting problem \(0 \in (F + G)(\tilde{u}^*)\), with operators defined as
+\begin{equation}
+F(\tilde{u}) = (I - W^T)(\tilde{u}), \quad G(\tilde{u}) = D\tilde{u} - v
+\end{equation}
+where \(D\) is a diagonal matrix defined by \(J = (I + D)^{-1}\) (where we allow for the possibility of \(D_{ii} = \infty\) for \(J_{ii} = 0\)).
+\end{theorem}
+
+\solution{}
+
+
+
+
+

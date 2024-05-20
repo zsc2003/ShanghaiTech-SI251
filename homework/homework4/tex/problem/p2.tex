@@ -1,0 +1,34 @@
+\section{Alternating Direction Method of Multipliers}
+{\color{red} (35 pts)} Consider the following problem.
+\begin{equation}
+\begin{aligned}
+\label{admm}
+& \text{minimize }
+& & -\log \det X + \text{Tr}(XC) + \rho\|X\|_1 \\
+& \text{subject to}
+& & X \succeq 0
+\end{aligned}
+\end{equation}
+
+In (\ref{admm}), \(\| \cdot \|_1\) is the entrywise \(\ell_1\)-norm. This problem arises in estimation of sparse undirected graphical models. \( C \) is the empirical covariance matrix of the observed data. The goal is to estimate a covariance matrix with sparse inverse for the observed data. In order to apply ADMM we rewrite (\ref{admm}) as
+\begin{equation}
+\begin{aligned}
+& \text{minimize }
+& & -\log \det X + \text{Tr}(XC) + \mathbb{I}_{X \succeq 0}(X) + \rho\|Y\|_1\\
+& \text{subject to}
+& &  X = Y
+\end{aligned}
+\end{equation}
+where $\mathbb{I}_{X \succeq 0}(\cdot)$ is the indicator function associated with the set $X \succeq 0$. Please provide the ADMM update (the derivation process is required) for each variable at the t-th iteration.
+
+\solution{}
+
+
+
+
+
+
+
+
+
+\newpage
