@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.3.6)  5 JUN 2024 13:41
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.3.6)  9 JUN 2024 22:31
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -527,17 +527,52 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 71.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-] (./problem/p1.tex [2]) (./problem/p2.tex [3]) (./problem/p3.tex) [4] (./hw4.aux)
+] (./problem/p1.tex
+Underfull \hbox (badness 10000) in paragraph at lines 14--17
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--22
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--32
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 33--35
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 36--37
+
+ []
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 50--51
+
+ []
+
+
+Overfull \hbox (65.00157pt too wide) in paragraph at lines 77--81
+\TU/lmr/m/n/10 Suppose that the singular values of $\OT1/cmr/bx/n/10 ^^F$ \TU/lmr/m/n/10 (i.e. the singular value of $\OT1/cmr/bx/n/10 X$\TU/lmr/m/n/10 ) compose a vector $\OT1/cmr/bx/n/10 x \OT1/cmr/m/n/10 = (\OML/cmm/m/it/10 ^^[[]\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 ^^F\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; ^^[[]\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 ^^F\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; []  ; ^^[[]\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 ^^F\OT1/cmr/m/n/10 ))[]$\TU/lmr/m/n/10 ,
+ []
+
+[3] [4]) (./problem/p2.tex [5]) (./problem/p3.tex) [6] (./hw4.aux)
 Package rerunfilecheck Info: File `hw4.out' has not changed.
 (rerunfilecheck)             Checksum: E73C078B204278F522A71FCAC6D7660F;684.
  ) 
 Here is how much of TeX's memory you used:
  13525 strings out of 476683
  206320 string characters out of 5807576
- 1852012 words of memory out of 5000000
+ 1861012 words of memory out of 5000000
  33549 multiletter control sequences out of 15000+600000
  520014 words of font info for 74 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 72i,9n,76p,394b,340s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,14n,76p,437b,357s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on hw4.pdf (4 pages).
+Output written on hw4.pdf (6 pages).

@@ -1,21 +1,99 @@
 \section{Proximal Operator}
     For each of the following convex functions, compute the proximal operator $\text{prox}_{f}$:
 \begin{itemize}
-    \item[(1)] {\color{red} (10 pts)}  $f({x}) = \lambda\Vert {x }\Vert_{1}$, where ${x}\in\mathbb{R}^{d}$ and $\lambda \in \mathbb{R}_{+}$ is the regularization parameter.
+    \item[(1)] {\color{red} (10 pts)}  $f({\mathbf{x}}) = \lambda\Vert {\mathbf{x} }\Vert_{1}$, where ${\mathbf{x}}\in\mathbb{R}^{d}$ and $\lambda \in \mathbb{R}_{+}$ is the regularization parameter.
 
-    \item[(2)] {\color{red} (20 pts)} $f({X}) = \lambda \Vert {X}\Vert_{*}$, where ${X}\in \mathbb{R}^{d\times m}$ is a matrix, $\Vert {X}\Vert_{*}$ denotes the nuclear norm, and $\lambda\in \mathbb{R}_{+}$ is the regularization parameter.
+    \item[(2)] {\color{red} (20 pts)} $f(\mathbf{X}) = \lambda \Vert \mathbf{X}\Vert_{*}$, where $\mathbf{X}\in \mathbb{R}^{d\times m}$ is a matrix, $\Vert \mathbf{X}\Vert_{*}$ denotes the nuclear norm, and $\lambda\in \mathbb{R}_{+}$ is the regularization parameter.
 \end{itemize}
 
 \solution{}
-(1)
+(1) The $L_1$ regularization's proximal term is
+$$\text{prox}_{f}(\mathbf{x})=\arg\min\limits_{\mathbf{z}}\left\{\dfrac{1}{2}\|\mathbf{z}-\mathbf{x}\|_2^2+f(\mathbf{z})\right\}=\sum\limits_{i=1}^d\arg\min\limits_{z_i}\left\{\dfrac{1}{2}(z_i-x_i)^2+\lambda|z_i|\right\}$$
+Since the proximal term is seperatable, so we can decompose into item by item optimization with soft-thresholding.\\
+i.e.
+$$(\text{prox}_{f}(\mathbf{x}))_i = \psi_{\text{st}}(x_i,\lambda)$$
+where $\psi_{\text{st}}$ is the soft-thresholding function.\\
+Then we analyze the soft-thresholding function:\\
+$$\psi_{\text{st}}(x,\lambda) = \arg\min\limits_{z_i}\left\{\dfrac{1}{2}(z_i-x_i)^2+\lambda|z_i|\right\}$$
+\begin{itemize}
+    \item If $z_i\geq 0$, then $\arg\min\limits_{z_i}\left\{\dfrac{1}{2}z_i^2+(\lambda-x_i)z_i+\dfrac{1}{2}x_i^2\right\}$, which is a simple quadratic function. \\
+    1. If $x_i \geq \lambda$, then $z_i = x_i-\lambda\geq 0$ \\
+    2. If $x_i < \lambda$, then $z_i = 0$ \\
+    \item If $z_i < 0$, then $\arg\min\limits_{z_i}\left\{\dfrac{1}{2}z_i^2-(\lambda+x_i)z_i+\dfrac{1}{2}x_i^2\right\}$, which is also a simple quadratic function. \\
+    1. If $x_i \leq -\lambda$, then $z_i = x_i+\lambda\leq 0$ \\
+    2. If $x_i > -\lambda$, then $z_i = 0$
+\end{itemize}
+So combine all these cases together, we can get the soft-thresholding function, i.e. the proximal operator of $f(\mathbf{x})$ is:
+$$(\text{prox}_{f}(\mathbf{x}))_i = \begin{cases}
+x_i-\lambda, & x_i > \lambda \\
+0, & |x_i| \leq \lambda \\
+x_i+\lambda, & x_i < -\lambda
+\end{cases}$$\\
 
+(2) To better get the proximal operator of $f(\mathbf{X})$, we firstly introduce $2$ Lemmas:\\
+For any matrix $\mathbf{Z}\in \mathbb{R}^{d\times m}$, and orthogonal matrix $\mathbf{U}\in \mathbb{R}^{d\times d},\mathbf{V}\in \mathbb{R}^{m\times m}$, let $\mathbf{Z}'=\mathbf{U}^{\top}\mathbf{Z}\mathbf{V}\in \mathbb{R}^{d\times m}$, then we have:\\
 
+Lemma 1:\\
+$$\|\mathbf{Z}'\|_* = \|\mathbf{Z}\|_*$$
+proof:
+\begin{align*}
+    \|\mathbf{Z}'\|_* &= \|\mathbf{U}^{\top}\mathbf{Z}\mathbf{V}\|_* \\
+    &= \text{Tr}\left(\sqrt{(\mathbf{U}^{\top}\mathbf{Z}\mathbf{V})^{\top}\mathbf{U}^{\top}\mathbf{Z}\mathbf{V}}\right) \\
+    &= \text{Tr}\left(\sqrt{\mathbf{V}^{\top}\mathbf{Z}^{\top}\mathbf{U}\mathbf{U}^{\top}\mathbf{Z}\mathbf{V}}\right) \\
+    &= \text{Tr}\left(\sqrt{(\mathbf{V}^{\top}\mathbf{Z}^{\top})(\mathbf{Z}\mathbf{V})}\right) \text{ \ \ \ \ \ ($\mathbf{U}$ is orthogonal)} \\
+    &= \text{Tr}\left(\sqrt{(\mathbf{Z}\mathbf{V})(\mathbf{V}^{\top}\mathbf{Z}^{\top})}\right) \text{ \ \ \ \ \ ($\text{Tr}(\mathbf{AB})=\text{Tr}(\mathbf{BA})$)} \\
+    &= \text{Tr}\left(\sqrt{\mathbf{Z}\mathbf{Z}^{\top}}\right) \text{ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ($\mathbf{V}$ is orthogonal)} \\
+    &= \text{Tr}\left(\sqrt{\mathbf{Z}^{\top}\mathbf{Z}}\right) \text{ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ($\text{Tr}(\mathbf{AB})=\text{Tr}(\mathbf{BA})$)} \\
+    &= \|\mathbf{Z}\|_*
+\end{align*}
 
+Lemma 2:\\
+$$\|\mathbf{Z}-\mathbf{X}\|_F^2 = \|\mathbf{U}^{\top}(\mathbf{Z}-\mathbf{X})\mathbf{V}\|_F^2$$
 
+proof:
+\begin{align*}
+    \|\mathbf{U}^{\top}(\mathbf{Z}-\mathbf{X})\mathbf{V}\|_F^2
+    &= \text{Tr}\left((\mathbf{U}^{\top}(\mathbf{Z}-\mathbf{X})\mathbf{V})^{\top}(\mathbf{U}^{\top}(\mathbf{Z}-\mathbf{X})\mathbf{V})\right) \\
+    &= \text{Tr}\left(\mathbf{V}^{\top}(\mathbf{Z}-\mathbf{X})^{\top}\mathbf{U}\mathbf{U}^{\top}(\mathbf{Z}-\mathbf{X})\mathbf{V}\right) \\
+    &= \text{Tr}\left((\mathbf{V}^{\top}(\mathbf{Z}-\mathbf{X})^{\top})((\mathbf{Z}-\mathbf{X})\mathbf{V})\right) \text{ \ \ \ \ \ ($\mathbf{U}$ is orthogonal)} \\
+    &= \text{Tr}\left((\mathbf{Z}-\mathbf{X})\mathbf{V}\mathbf{V}^{\top}(\mathbf{Z}-\mathbf{X})^{\top}\right) \text{ \ \ \ \ \ \ \ \ \ \ ($\text{Tr}(\mathbf{AB})=\text{Tr}(\mathbf{BA})$)} \\
+    &= \text{Tr}\left((\mathbf{Z}-\mathbf{X})(\mathbf{Z}-\mathbf{X})^{\top}\right) \text{ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ($\mathbf{V}$ is orthogonal)} \\
+    &= \text{Tr}\left((\mathbf{Z}-\mathbf{X})^{\top}(\mathbf{Z}-\mathbf{X})\right) \text{ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ($\text{Tr}(\mathbf{AB})=\text{Tr}(\mathbf{BA})$)} \\
+    &= \|\mathbf{Z}-\mathbf{X}\|_F^2
+\end{align*}
 
-(2)
+Then we could better analyze the proximal operator of $f(\mathbf{X})$ with the proved Lemmas:\\
+We can firstly do SVD decomposition for $\mathbf{X}$, i.e. $\mathbf{X}=\mathbf{U}\mathbf{\Sigma}\mathbf{V}^{\top}$, where $\mathbf{U}\in \mathbb{R}^{d\times d},\mathbf{V}\in \mathbb{R}^{m\times m}$ are orthogonal matrices, and $\mathbf{\Sigma}\in \mathbb{R}^{d\times m}$ is a diagonal matrix. And let $\mathbf{Z}'=\mathbf{U}^{\top}\mathbf{Z}\mathbf{V}$, where $\mathbf{Z}'\in \mathbb{R}^{d\times m}$.\\
+Then we have:
+\begin{align*}
+    \text{prox}_{f}(\mathbf{X}) &= \arg\min\limits_{\mathbf{Z}}\left\{\dfrac{1}{2}\|\mathbf{Z}-\mathbf{X}\|_F^2+f(\mathbf{Z})\right\} \\
+    &= \arg\min\limits_{\mathbf{Z}}\left\{\dfrac{1}{2}\|\mathbf{Z}-\mathbf{X}\|_F^2+\lambda\|\mathbf{Z}\|_*\right\} \\
+    &= \arg\min\limits_{\mathbf{Z}}\left\{\dfrac{1}{2}\|\mathbf{U}^{\top}(\mathbf{Z}-\mathbf{X})\mathbf{V}\|_F^2+\lambda\|\mathbf{Z}'\|_*\right\} \text{\ \ \ (Lemma 1 and Lemma 2)} \\
+    &= \mathbf{U}\arg\min\limits_{\mathbf{Z}'}\left\{\dfrac{1}{2}\|\mathbf{Z}'-\mathbf{\Sigma}\|_F^2+\lambda\|\mathbf{Z}'\|_*\right\}\mathbf{V}^{\top} \text{\ \ \ \ ($\mathbf{Z}=\mathbf{U}\mathbf{Z}'\mathbf{V}^{\top})$} \\
+    &= \mathbf{U}\text{prox}_{f}(\mathbf{\Sigma})\mathbf{V}^{\top}
+\end{align*}
 
+Then we consider the proximal operator of $\text{prox}_{f}(\mathbf{\Sigma})$:
+$$\text{prox}_{f}(\mathbf{\Sigma}) = \arg\min\limits_{\mathbf{Z}}\left\{\dfrac{1}{2}\|\mathbf{Z}-\mathbf{\Sigma}\|_F^2+\lambda\|\mathbf{Z}\|_*\right\}$$
+Since the Frobenius norm can be also written as the sum of the square of each element, and the nuclear norm is the sum of the singular values. So we could discover that $\mathbf{Z}$ must be a matrix that only has non-zero values on the diagonal.\\
+Suppose that the singular values of $\mathbf{\Sigma}$ (i.e. the singular value of $\mathbf{X}$) compose a vector $\mathbf{x}=(\sigma_1(\mathbf{\Sigma}),\sigma_2(\mathbf{\Sigma}),\cdots,\sigma_{\min\{d,m\}}(\mathbf{\Sigma}))^{\top}$, and the singular values of $\mathbf{Z}$ compose the vector $\mathbf{z}=(\sigma_1(\mathbf{Z}),\sigma_2(\mathbf{Z}),\cdots,\sigma_{\min\{d,m\}}(\mathbf{Z}))^{\top}$.\\
+Since the singular vectors are non-negative, so we could get the proximal operator of $f(\mathbf{X})$ as:
+\begin{align*}
+    \text{prox}_{f}(\mathbf{\Sigma}) &= \arg\min\limits_{\mathbf{Z}}\left\{\dfrac{1}{2}\|\mathbf{Z}-\mathbf{\Sigma}\|_F^2+\lambda\|\mathbf{Z}\|_*\right\} \\
+    &= \arg\min\limits_{\mathbf{Z}}\left\{\dfrac{1}{2}\sum\limits_{i=1}^{\min\{d,m\}}(\sigma_i(\mathbf{Z})-\sigma_i(\mathbf{\Sigma}))^2+\lambda\sum\limits_{i=1}^{\min\{d,m\}}\sigma_i(\mathbf{Z})\right\} \\
+    &\Leftrightarrow \arg\min\limits_{\mathbf{z}} \left\{\dfrac{1}{2}\sum\limits_{i=1}^{\min\{d,m\}}(z_i-x_i)^2+\lambda\sum\limits_{i=1}^{\min\{d,m\}}z_i\right\} \\
+    &= \arg\min\limits_{\mathbf{z}} \left\{\dfrac{1}{2}\|\mathbf{z}-\mathbf{x}\|_2^2+\lambda\|\mathbf{z}\|_1\right\}
+\end{align*}
+And we could find that the result is the exactly the same form as the $L_1$ regularization proximal operator, where we have calculated at (1). \\
+Also, since $\lambda$ is a positive number, and all singular values are non-negative, i.e. $\lambda>0, \sigma_i(\mathbf{X})\geq 0$.\\
+And we can define that:
+$$(\mathbf{\Sigma}_{\lambda})_{ij} = \begin{cases}
+\max\left\{\sigma_i(\mathbf{X})-\lambda, 0\right\}, & i = j \\
+0, & i \neq j
+\end{cases}$$
 
-
+So combine all above, we can get the proximal operator of $f(\mathbf{X})$ is $\text{prox}_{f}(\mathbf{X})\in\mathbb{R}^{d\times m}$:
+$$\text{prox}_{f}(\mathbf{X})=\mathbf{U}\mathbf{\Sigma}_{\lambda}\mathbf{V}^{\top}$$
+Where $\mathbf{U},\mathbf{V}$ are the orthogonal matrices from the SVD decomposition of $\mathbf{X}$, and $\mathbf{\Sigma}_{\lambda}$ is defined above.
 
 \newpage
