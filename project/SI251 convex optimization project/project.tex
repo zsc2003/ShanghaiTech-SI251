@@ -1,0 +1,167 @@
+% This is template for EE140
+% principle_of_communication_hw_template
+\documentclass[a4paper, 11pt]{article}
+\usepackage{comment} % enables the use of multi-line comments (\ifx \fi) 
+\usepackage{lipsum} %This package just generates Lorem Ipsum filler text. 
+\usepackage{fullpage} % changes the margin
+\usepackage[margin=1in]{geometry} 
+\usepackage{color}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{enumitem}
+\usepackage{stackrel}
+\usepackage{mathtools,bm}
+\usepackage{mathrsfs}
+\usepackage{tcolorbox}
+\usepackage{comment} % enables the use of multi-line comments (\ifx \fi) 
+\usepackage{lipsum} %This package just generates Lorem Ipsum filler text. 
+\usepackage{fullpage} % changes the margin
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{float}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{enumitem}
+\usepackage{stackrel}
+\usepackage{mathtools,bm}
+\usepackage{graphicx}
+\usepackage{dsfont}
+\usepackage{listings}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, urlcolor=red}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{booktabs}
+\def\d{\mathrm{d}}
+
+\newif\ifsolution
+
+\newenvironment{solution}{\begin{tcolorbox}\noindent\textbf{ Solution:} \\}{\end{tcolorbox} }
+\renewcommand\thesection{Part \arabic{section}.} \renewcommand\thesubsection{Question \arabic{subsection}}
+\solutiontrue % show solution
+% \solutionfalse % no solution
+
+\definecolor{DarkGreen}{rgb}{0.0,0.4,0.0}
+
+\lstloadlanguages{Matlab}
+\lstset{language=Matlab,
+	frame=single,                           % single framed
+	basicstyle=\small\ttfamily,
+	keywordstyle=[1]\color{Blue}\bfseries,  % primitive funs in bold blue
+	keywordstyle=[2]\color{Purple},         % args of funs in purple
+	keywordstyle=[3]\color{Blue}\underbar,  % user funs in blue with underbar
+	stringstyle=\color{Purple},             % strings in purple
+	showstringspaces=false,
+	identifierstyle=,
+	commentstyle=\usefont{T1}{pcr}{m}{sl}\color{DarkGreen}\small,
+	tabsize=4,
+	% more standard MATLAB funcs
+	morekeywords={sawtooth, square},
+	% args of funcs
+	morekeywords=[2]{on, off, interp},
+	% user funcs
+	morekeywords=[3]{FindESS, homework_example},
+	morecomment=[l][\color{Blue}]{...},     % line continuation (...) like blue comment
+	numbers=left,
+	numberstyle=\tiny\color{Blue},
+	firstnumber=1,
+	stepnumber=1
+}
+
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{reflection}[2][Reflection]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{proposition}[2][Proposition]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+
+\begin{document}
+	\title{SI251 Convex Optimization\\
+		Project  } % 
+	\author{ 
+		Instructors: Ye Shi (shiye@shanghaitech.edu.cn), Yuanming Shi (shiym@shanghaitech.edu.cn) } 
+	\date{2024 Spring}
+	\maketitle
+	\begin{tcolorbox}
+		\begin{itemize}
+			\item Please register your topic on \url{https://365.kdocs.cn/l/cgVqFuu8KMHI}.
+			\item If the paper you seek to reproduce is not included in the supplementary materials, you must send an email to inform instructors.
+			\item For each paper, no more than 3 teams to reproduce it.
+			\item The presentation is scheduled for Week 16, with the final report due in Week 17.
+		\end{itemize} 
+	\end{tcolorbox}
+\section*{Project Overview}
+
+In this project, you will explore advanced topics in optimization by engaging deeply with recent research papers. The goal is to enhance your understanding and ability to implement, analyze, and possibly extend current optimization techniques. This project will require you to select a paper, replicate its results, and develop incremental improvements or new insights related to the work.
+
+\section*{Project Requirements}
+
+\begin{enumerate}[label=\arabic*.]
+	\item \textbf{Paper Selection}:
+	\begin{itemize}
+		\item You can choose from the list of papers provided in the accompanying folder, but for each paper, no more than 3 teams to reproduce it. Alternatively, you are encouraged to select a paper from reputable optimization journals or machine learning conferences published in recent years (after 2019), but you must send an email to inform instructors. Here are some recommended conference and journal:
+		\begin{itemize}
+			\item (Mechine Learning) NeurIPS, ICLR, ICML, JMLR, TPAMI, etc.
+			\item (Operation Research) Operational Research, Mathmatical Programming, etc.
+		\end{itemize}
+		\item The topic of the paper should align with one or more of the following keywords or themes discussed in the course:
+		\begin{itemize}
+			\item Optimal transport
+			\item Bilevel optimization
+			\item Combinatorial optimization
+			\item Implicit differentiation
+			\item Diffusion model
+			\item Federated learning
+			\item Smart predict-then-optimize
+		\end{itemize}
+	\end{itemize}
+	
+	\item \textbf{Project requirement}:
+	\begin{itemize}
+		\item \textbf{Replication (Basic Pass Score)}: You should successfully replicate the study presented in your chosen paper. This involves understanding, coding, and achieving similar results as those documented in the original work.
+		\item \textbf{Incremental Work (Higher Score)}: To achieve a higher grade, you are expected to make some original contribution. This could be an improvement on the existing methods, application to a new problem, or a novel insight or analysis.
+	\end{itemize}
+	\item \textbf{Assessment Criteria}
+	
+	\begin{itemize}
+		\item \textbf{Replication Accuracy}: How closely your results match those of the original paper.
+		\item \textbf{Original Contribution}: The significance and relevance of any improvements or new insights you provide.
+		\item \textbf{Clarity and Quality of Presentation and Report}: How well you communicate your ideas and findings.
+	\end{itemize}
+	
+	\item \textbf{Project Report}:
+	\begin{itemize}
+		\item Submit a report of at least 4 pages, distinct from the original paper. It should detail your replication process, any incremental work, and present your results clearly.
+		\item The report should reflect a comprehensive understanding of the topic and document any new contributions made during the project.
+		\item The submission should use the NeurIPS 2024 template attached in the accompanying folder.
+	\end{itemize}
+	
+	\item \textbf{Team Collaboration}:
+	\begin{itemize}
+		\item Groups of 1-3 students are allowed. Collaboration within your group is essential, as all members will share the same grade. Contributions by all team members should be equitable, with no adjustments made for individual efforts.
+	\end{itemize}
+	
+\end{enumerate}
+
+
+\textbf{Hint: Use of Large Language Models (LLMs)}:
+\begin{itemize}
+	\item You are permitted to use LLMs for assistance with coding, understanding concepts, or generating ideas.
+	\item However, it is imperative that you critically evaluate and understand the output from LLMs. You are responsible for the content and integrity of the final submission.
+\end{itemize}
+This project is an opportunity to delve into the complexities of optimization, challenge your understanding, and contribute to the field. We look forward to your innovative approaches and solutions.
+
+\end{document}
