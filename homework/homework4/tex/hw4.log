@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.3.6)  14 JUN 2024 16:47
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.3.6)  16 JUN 2024 09:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -562,17 +562,47 @@ Overfull \hbox (65.00157pt too wide) in paragraph at lines 77--81
 \TU/lmr/m/n/10 Suppose that the singular values of $\OT1/cmr/bx/n/10 ^^F$ \TU/lmr/m/n/10 (i.e. the singular value of $\OT1/cmr/bx/n/10 X$\TU/lmr/m/n/10 ) compose a vector $\OT1/cmr/bx/n/10 x \OT1/cmr/m/n/10 = (\OML/cmm/m/it/10 ^^[[]\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 ^^F\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; ^^[[]\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 ^^F\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; []  ; ^^[[]\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 ^^F\OT1/cmr/m/n/10 ))[]$\TU/lmr/m/n/10 ,
  []
 
-[3] [4]) (./problem/p2.tex [5]) (./problem/p3.tex) [6] (./hw4.aux)
+[3] [4]) (./problem/p2.tex
+Underfull \hbox (badness 10000) in paragraph at lines 37--39
+
+ []
+
+
+Overfull \hbox (15.4464pt too wide) detected at line 54
+[]
+ []
+
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 81--83
+
+ []
+
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 106--108
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--114
+
+ []
+
+[7]) (./problem/p3.tex [8]
+Underfull \hbox (badness 10000) in paragraph at lines 66--68
+
+ []
+
+) [9] (./hw4.aux)
 Package rerunfilecheck Info: File `hw4.out' has not changed.
 (rerunfilecheck)             Checksum: E73C078B204278F522A71FCAC6D7660F;684.
  ) 
 Here is how much of TeX's memory you used:
- 13520 strings out of 476683
- 206189 string characters out of 5807576
- 1861012 words of memory out of 5000000
- 33547 multiletter control sequences out of 15000+600000
- 519998 words of font info for 72 fonts, out of 8000000 for 9000
+ 13532 strings out of 476683
+ 206313 string characters out of 5807576
+ 1866012 words of memory out of 5000000
+ 33553 multiletter control sequences out of 15000+600000
+ 521828 words of font info for 78 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 72i,14n,76p,437b,357s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,20n,76p,519b,357s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on hw4.pdf (6 pages).
+Output written on hw4.pdf (9 pages).

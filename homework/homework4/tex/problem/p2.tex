@@ -4,9 +4,9 @@
 \begin{aligned}
 \label{admm}
 & \text{minimize }
-& & -\log \det X + \text{Tr}(XC) + \rho\|X\|_1 \\
+& & -\log \det \mathbf{X} + \text{Tr}(\mathbf{XC}) + \rho\|\mathbf{X}\|_1 \\
 & \text{subject to}
-& & X \succeq 0
+& & \mathbf{X} \succeq 0
 \end{aligned}
 \end{equation}
 
@@ -14,22 +14,115 @@ In (\ref{admm}), \(\| \cdot \|_1\) is the entrywise \(\ell_1\)-norm. This proble
 \begin{equation}
 \begin{aligned}
 & \text{minimize }
-& & -\log \det X + \text{Tr}(XC) + \mathbb{I}_{X \succeq 0}(X) + \rho\|Y\|_1\\
+& & -\log \det \mathbf{X} + \text{Tr}(\mathbf{XC}) + \mathbb{I}_{\mathbf{X} \succeq 0}(X) + \rho\|\mathbf{Y}\|_1\\
 & \text{subject to}
-& &  X = Y
+& &  \mathbf{X} = \mathbf{Y}
 \end{aligned}
 \end{equation}
-where $\mathbb{I}_{X \succeq 0}(\cdot)$ is the indicator function associated with the set $X \succeq 0$. Please provide the ADMM update (the derivation process is required) for each variable at the t-th iteration.
+where $\mathbb{I}_{\mathbf{X} \succeq 0}(\cdot)$ is the indicator function associated with the set $\mathbf{X} \succeq 0$. Please provide the ADMM update (the derivation process is required) for each variable at the t-th iteration.
 
 \solution{}
 
+For the objective function, let $f_1(\mathbf{X})=-\log\det \mathbf{X}+\text{Tr}(\mathbf{XC})+\mathbb{I}_{\mathbf{X}\succeq 0}(\mathbf{X})$ and $f_2(\mathbf{Y})=\rho\|\mathbf{Y}\|_1$.\\
+And for the constrains, let $\mathbf{A}=\mathbf{I}$ and $\mathbf{B}=-\mathbf{I}$, $\mathbf{b}=\mathbf{0}$.\\
+Then from what we have learned about ADMM, the update for each variable at the t-th iteration with a given $\lambda$ is as follows:
+$$\begin{cases}
+\begin{aligned}
+&\mathbf{X}^{t+1}=\arg\min_{\mathbf{X}}\left\{f_1(\mathbf{X})+\dfrac{\lambda}{2}\left\|\mathbf{AX}+\mathbf{BY}^t-\mathbf{b}+\dfrac{1}{\lambda}\mathbf{\Lambda}^t\right\|_F^2\right\}\\
+&\mathbf{Y}^{t+1}=\arg\min_{\mathbf{Y}}\left\{f_2(\mathbf{Y})+\dfrac{\lambda}{2}\left\|\mathbf{AX}^{t+1}+\mathbf{BY}-\mathbf{b}+\dfrac{1}{\lambda}\mathbf{\Lambda}^t\right\|_F^2\right\}\\
+&\mathbf{\Lambda}^{t+1}=\mathbf{\Lambda}^t+\lambda(\mathbf{AX}^{t+1}+\mathbf{BY}^{t+1}-\mathbf{b})
+\end{aligned}
+\end{cases}$$
+
+And we can put the above equations into the specific form of the problem.
+i.e.\\
+$$\begin{cases}
+\begin{aligned}
+&\mathbf{X}^{t+1}=\arg\min_{\mathbf{X}}\left\{-\log\det \mathbf{X}+\text{Tr}(\mathbf{XC})+\mathbb{I}_{\mathbf{X}\succeq 0}(\mathbf{X})+\dfrac{\lambda}{2}\left\|\mathbf{X}-\mathbf{Y}^t+\dfrac{1}{\lambda}\mathbf{\Lambda}^t\right\|_F^2\right\}\\
+&\mathbf{Y}^{t+1}=\arg\min_{\mathbf{Y}}\left\{\rho\left\|\mathbf{Y}\right\|_1+\dfrac{\lambda}{2}\left\|\mathbf{X}^{t+1}-\mathbf{Y}+\dfrac{1}{\lambda}\mathbf{\Lambda}^t\right\|_F^2\right\}\\
+&\mathbf{\Lambda}^{t+1}=\mathbf{\Lambda}^t+\lambda(\mathbf{X}^{t+1}-\mathbf{Y}^{t+1})
+\end{aligned}
+\end{cases}$$
+
+Then we can seperately solve the above equations.\\
+1. For $\mathbf{X}^{t+1}$, we have
+\begin{align*}
+\mathbf{X}^{t+1} &= \arg\min_{\mathbf{X}}\left\{-\log\det \mathbf{X}+\text{Tr}(\mathbf{XC})+\mathbb{I}_{\mathbf{X}\succeq 0}(\mathbf{X})+\dfrac{\lambda}{2}\left\|\mathbf{X}-\mathbf{Y}^t+\dfrac{1}{\lambda}\mathbf{\Lambda}^t\right\|_F^2\right\} \\
+&= \arg\min_{\mathbf{X}\succeq 0}\left\{-\log\det \mathbf{X}+\text{Tr}(\mathbf{X^{\top}C^{\top}})+\dfrac{\lambda}{2}\left\|\mathbf{X}-\mathbf{Y}^t+\dfrac{1}{\lambda}\mathbf{\Lambda}^t\right\|_F^2\right\} \\
+&= \arg\min_{\mathbf{X}\succeq 0}\left\{-\log\det \mathbf{X}+\dfrac{\lambda}{2}\left(\left\|\mathbf{X}-\mathbf{Y}^t+\dfrac{1}{\lambda}\mathbf{\Lambda}^t\right\|_F^2+2\text{Tr}(\dfrac{1}{\lambda}\mathbf{X^{\top}C^{\top}})+\|\mathbf{C}\|_F^2\right)\right\} \text{($\|\mathbf{C}\|_F^2$ do not effect by $\mathbf{X}$)}\\
+&= \arg\min_{\mathbf{X}\succeq 0}\left\{-\log\det \mathbf{X}+\dfrac{\lambda}{2}\left(\left\|\mathbf{X}-\mathbf{Y}^t+\dfrac{1}{\lambda}\mathbf{\Lambda}^t+\dfrac{1}{\lambda}\mathbf{C^{\top}}\right\|_F^2\right)\right\}\\
+\end{align*}
+
+Since we want to minimize the objective function with respect to $\mathbf{X}$, so we can regard all the terms that do not contain $\mathbf{X}$ as constants. \\
+i.e. Let $\mathbf{Z}= \mathbf{Y}^t-\dfrac{1}{\lambda}\mathbf{\Lambda}^t-\dfrac{1}{\lambda}\mathbf{C^{\top}}$, then we have
+\begin{align*}
+\mathbf{X}^{t+1} &= \arg\min_{\mathbf{X}\succeq 0}\left\{-\log\det \mathbf{X}+\dfrac{\lambda}{2}\left\|\mathbf{X}-\mathbf{Z}\right\|_F^2\right\} \\
+&= \arg\min_{\mathbf{X}\succeq 0}\left\{-\log\det (\dfrac{1}{\lambda}\mathbf{X})+\dfrac{1}{2}\left\|\mathbf{X}-\mathbf{Z}\right\|_F^2\right\} \\
+\end{align*}
+We can apply singular value decomposition to $\mathbf{Z}$, i.e. $\mathbf{Z}=\mathbf{U}\mathbf{\Sigma}_{\mathbf{Z}}\mathbf{V}^{\top}$, where $\mathbf{U}\in \mathbb{R}^{n\times n},\mathbf{V}\in \mathbb{R}^{n\times n}$ are orthogonal matrices, and $\mathbf{\Sigma}_{\mathbf{Z}}\in \mathbb{R}^{n\times n}$ is a diagonal matrix.\\
+Similarly to what we have done in Problem1's (2), with Lemma 2, we have proved that
+$$\|\mathbf{Z}-\mathbf{X}\|_F^2 = \|\mathbf{U}^{\top}(\mathbf{Z}-\mathbf{X})\mathbf{V}\|_F^2$$
+And since $\mathbf{U},\mathbf{V}$ are orthogonal matrices, so $\det(\mathbf{U})=\det(\mathbf{V})=1$, so
+\begin{align*}
+\mathbf{X}^{t+1} &= \arg\min_{\mathbf{X}\succeq 0}\left\{-\log\det (\dfrac{1}{\lambda}\mathbf{X})+\dfrac{1}{2}\left\|\mathbf{X}-\mathbf{Z}\right\|_F^2\right\} \\
+&= \mathbf{U} \arg\min_{\mathbf{X}\succeq 0}\left\{-\log\det (\dfrac{1}{\lambda}\mathbf{X})+\dfrac{1}{2}\left\|\mathbf{X}-\mathbf{\Sigma}_{\mathbf{Z}}\right\|_F^2\right\} \mathbf{V}^{\top}
+\end{align*}
+Suppose the eigenvalues of $\mathbf{X}$ are $\boldsymbol{\lambda}_{\mathbf{X}}=(\lambda_1(\mathbf{X}),\lambda_2(\mathbf{X}),\cdots,\lambda_n(\mathbf{X}))^{\top}$, and the singular values of $\mathbf{Z}$ are $\boldsymbol{\sigma}_{\mathbf{Z}}=(\sigma_1(\mathbf{Z}),\sigma_2(\mathbf{Z}),\cdots,\sigma_n(\mathbf{Z}))^{\top}$, also similar with Problem1's (2), to minimize it, $\mathbf{X}$ should be a diagonal matrix that only has its non-negative eigenvalues on the diagonal.\\
+i.e.
+$$-\log\det (\dfrac{1}{\lambda}\mathbf{X})+\dfrac{1}{2}\left\|\mathbf{X}-\mathbf{\Sigma}_{\mathbf{Z}}\right\|_F^2=\sum_{i=1}^{n}\left\{-\log\left(\dfrac{\lambda_i(\mathbf{X})}{\lambda}\right)+\dfrac{1}{2}(\lambda_i(\mathbf{X})-\sigma_i(\mathbf{Z}))^2\right\}$$
+And each term is seperatable, to get the minima of each term, we just need to take the derivative of each term with respect to $\lambda_i(\mathbf{X})$ and set it to $0$.\\
+i.e.
+\begin{align*}
+\dfrac{\partial}{\partial \lambda_i(\mathbf{X})}\left\{-\log\left(\dfrac{\lambda_i(\mathbf{X})}{\lambda}\right)+\dfrac{1}{2}(\lambda_i(\mathbf{X})-\sigma_i(\mathbf{Z}))^2\right\} &= 0 \\
+-\dfrac{1}{\lambda\cdot \lambda_i(\mathbf{X})}+\lambda_i(\mathbf{X})-\sigma_i(\mathbf{Z}) &= 0 \\
+\lambda_i(\mathbf{X}) = \dfrac{1}{2}\left(\sigma_i(\mathbf{Z}) + \sqrt{\sigma_i(\mathbf{Z})^2 + \dfrac{4}{\lambda}}\right)
+\end{align*}
+So above all, we have proved that the update of $\mathbf{X}^{t+1}$ is
+$$\mathbf{X}^{t+1}=\dfrac{1}{2}\mathbf{U}\text{diag}\left(\sigma_i(\mathbf{Z}) + \sqrt{\sigma_i(\mathbf{Z})^2 + \dfrac{4}{\lambda}}\right)\mathbf{V}^{\top}$$
+Where $\mathbf{Z}= \mathbf{Y}^t-\dfrac{1}{\lambda}\mathbf{\Lambda}^t-\dfrac{1}{\lambda}\mathbf{C^{\top}}$, and $\mathbf{U},\mathbf{V}$ are the singular value decomposition of $\mathbf{Z}$.\\
 
 
+2. Similarly for $\mathbf{Y}^{t+1}$, we have
+$$\mathbf{Y}^{t+1}=\arg\min_{\mathbf{Y}}\left\{\rho\left\|\mathbf{Y}\right\|_1+\dfrac{\lambda}{2}\left\|\mathbf{X}^{t+1}-\mathbf{Y}+\dfrac{1}{\lambda}\mathbf{\Lambda}^t\right\|_F^2\right\}\\
+$$
+\begin{align*}
+\mathbf{Y}^{t+1} &= \arg\min_{\mathbf{Y}}\left\{\dfrac{\rho}{\lambda}\left\|\mathbf{Y}\right\|_1+\dfrac{1}{2}\left\|\mathbf{X}^{t+1}-\mathbf{Y}+\dfrac{1}{\lambda}\mathbf{\Lambda}^t\right\|_F^2\right\} \\
+&= \arg\min_{\mathbf{Y}}\left\{\dfrac{\rho}{\lambda}\left\|\mathbf{Y}\right\|_1+\dfrac{1}{2}\left\|\mathbf{Y} - \mathbf{X}^{t+1} -\dfrac{1}{\lambda}\mathbf{\Lambda}^t\right\|_F^2\right\} \\
+&= \text{prox}_{f}(\mathbf{X}^{t+1}+\dfrac{1}{\lambda}\mathbf{\Lambda}^t)
+\end{align*}
+Where $f(\mathbf{Y})=\dfrac{\rho}{\lambda}\left\|\mathbf{Y}\right\|_1$.\\
+Similarly to the Problem1's (1), we can get the proximal operator of $\mathbf{Y}$ by seperating the $\mathbf{Y}$ into $n\times n$ elements, and others are the exactly same.\\
+Suppose that each element of matrix $\left(\mathbf{X}^{t+1}+\dfrac{1}{\lambda}\mathbf{\Lambda}^t\right)$ in the $i$-th row and $j$-th column is $a_{ij}$, then we have
+$$\left(\text{prox}_{f}\left(\mathbf{X}^{t+1}+\dfrac{1}{\lambda}\mathbf{\Lambda}^t\right)\right)_{ij} = \begin{cases}
+a_{ij}-\dfrac{\rho}{\lambda}, & a_{ij} > \dfrac{\rho}{\lambda} \\
+0, & |a_{ij}| \leq \dfrac{\rho}{\lambda} \\
+a_{ij}+\dfrac{\rho}{\lambda}, & a_{ij} < -\dfrac{\rho}{\lambda}
+\end{cases}$$\\
+So above all, we have proved that the update of $\mathbf{Y}^{t+1}$ is
+$$\left(\mathbf{Y}^{t+1}\right)_{ij} = \begin{cases}
+a_{ij}-\dfrac{\rho}{\lambda}, & a_{ij} > \dfrac{\rho}{\lambda} \\
+0, & |a_{ij}| \leq \dfrac{\rho}{\lambda} \\
+a_{ij}+\dfrac{\rho}{\lambda}, & a_{ij} < -\dfrac{\rho}{\lambda}
+\end{cases}$$
+Where $a_{ij}$ is the $i$-th row and $j$-th column element of matrix $\left(\mathbf{X}^{t+1}+\dfrac{1}{\lambda}\mathbf{\Lambda}^t\right)$.\\
 
 
+3. For $\mathbf{\Lambda}^{t+1}$, it has already been a simplified form, so we can directly update it as
+$$\mathbf{\Lambda}^{t+1}=\mathbf{\Lambda}^t+\lambda(\mathbf{X}^{t+1}-\mathbf{Y}^{t+1})$$
 
-
-
-
+From 1., 2., 3., we can get the update for each variable at the t-th iteration.\\
+$$\begin{cases}
+\begin{aligned}
+\mathbf{X}^{t+1} &= \dfrac{1}{2}\mathbf{U}\text{diag}\left(\sigma_i(\mathbf{Z}) + \sqrt{\sigma_i(\mathbf{Z})^2 + \dfrac{4}{\lambda}}\right)\mathbf{V}^{\top} \\
+\mathbf{Y}^{t+1} &= \left(\mathbf{Y}^{t+1}\right)_{ij} = \begin{cases}
+a_{ij}-\dfrac{\rho}{\lambda}, & a_{ij} > \dfrac{\rho}{\lambda} \\
+0, & |a_{ij}| \leq \dfrac{\rho}{\lambda} \\
+a_{ij}+\dfrac{\rho}{\lambda}, & a_{ij} < -\dfrac{\rho}{\lambda}
+\end{cases} \\
+\mathbf{\Lambda}^{t+1} &= \mathbf{\Lambda}^t+\lambda(\mathbf{X}^{t+1}-\mathbf{Y}^{t+1})
+\end{aligned}
+\end{cases}$$
+Where $\mathbf{Z}= \mathbf{Y}^t-\dfrac{1}{\lambda}\mathbf{\Lambda}^t-\dfrac{1}{\lambda}\mathbf{C^{\top}}$, and $\mathbf{U},\mathbf{V}$ are the singular value decomposition of $\mathbf{Z}$.\\
+And $a_{ij}$ is the $i$-th row and $j$-th column element of matrix $\left(\mathbf{X}^{t+1}+\dfrac{1}{\lambda}\mathbf{\Lambda}^t\right)$.
 
 \newpage

@@ -22,8 +22,53 @@ where \(D\) is a diagonal matrix defined by \(J = (I + D)^{-1}\) (where \( J_{ii
 
 
 \solution{}
+Since $D$ is a diagonal matrix, and $J=(I+D)^{-1}$, so $J$ is also a diagonal matrix. i.e. $J=J^T$.
+
+1. When $D_{ii}<+\infty$, i.e. $J_{ii}>0$,
+\begin{equation}
+\begin{aligned}
+&\ u^*=(I-JW)^{-T}v \\
+&\Leftrightarrow (I-W^TJ^T)u^*=v \\
+&\Leftrightarrow (I-W^TJ)u^*=v \text{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ($J^T=J$)} \\
+&\Leftrightarrow (I-W^T(I+D)^{-1})u^*=v \text{\ \ \ \ \ \ \ \ \ ($J=(I+D)^{-1}$)} \\
+&\Leftrightarrow W^{-T}(I-W^T(I+D)^{-1})u^*=W^{-T}v \\
+&\Leftrightarrow W^{-T}u^*-(I+D)^{-1}u=W^{-T}v \\
+&\Leftrightarrow (I+D)W^{-T}u^*-u^*=(I+D)W^{-T}v
+\end{aligned}
+\end{equation}
+
+Define $\tilde{u}^*=W^{-T}u^*$, i.e. $u^*=W^T\tilde{u}^*$, put it into equation (6), then we can get that
+\begin{equation}
+\begin{aligned}
+&\ u^*=(I-JW)^{-T}v \\
+&\Leftrightarrow  (I+D)\tilde{u}^*-W^T\tilde{u}^*=(I+D)W^{-T}v \\
+&\Leftrightarrow  \tilde{u}^*+D\tilde{u}^*-W^T\tilde{u}^*=(I+D)W^{-T}v
+\end{aligned}
+\end{equation}
+
+From Hint-2, we have $I=(I-JW)^{-T}(I-JW)^T$, so we can get that
+$$\left(I-W^TJ\right)\left(I+(I-W^TJ)^{-1}W^TJ\right)=I-W^TJ+W^TJ=I$$
+i.e.
+$$(I-JW)^{-T}=(I-W^TJ)^{-1}=I+(I-W^TJ)^{-1}W^TJ$$
+
+So we can get that
+\begin{align*}
+u^* &= (I-JW)^{-T}v \\
+&= v+(I-W^TJ)^{-1}W^TJv \\
+\end{align*}
+If we define $v'=(W^TJ)^{-1}v$, tand put it into the equation (7), we can get that
+$$\tilde{u}^*+D\tilde{u}^*-W^T\tilde{u}^*=(I+D)W^{-T}v=(I+D)Jv'=v'$$
+i.e.
+\begin{align*}
+(I-W^T)\tilde{u}^*+D\tilde{u}^* &= v' \\
+(I-W^T)\tilde{u}^*+D\tilde{u}^* -v' &= 0 \\
+F(\tilde{u}^*)+G(\tilde{u}^*) &= 0
+\end{align*}
+So we have proved that $0\in (F+G)(\tilde{u}^*)$.\\
 
 
+2. When $J_{ii}=0$, i.e. $D_{ii}=+\infty$, we can simply take the limit $D_{ii}\to +\infty$.\\
+Since that $I-W^T\succeq mI$ and $D_{ii}\geq 0$, and the operators are well-defined.\\
+So we can get that operator $F$ is strongly monotoneand, and the operator $G$ is monotone.
 
-
-
+So operator splitting techniques applied to the problem will be guaranteed to converge.
