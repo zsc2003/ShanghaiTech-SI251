@@ -1,0 +1,10 @@
+torch
+torchvision
+torchboard
+matplotlib
+scipy
+scikit-learn
+pathlib
+h5py
+numpy
+tqdm
